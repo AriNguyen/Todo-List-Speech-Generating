@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const port = 4000;
+const port = 3000;
 const hostname = "localhost";
 const bodyParser = require('body-parser');
 
