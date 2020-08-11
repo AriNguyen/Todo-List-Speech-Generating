@@ -5,28 +5,25 @@ const app = express();
 const cors = require("cors");
 const port = 4000;
 const hostname = "localhost";
+const bodyParser = require('body-parser');
 
-// number of rounds the bcrypt algorithm will use to generate the salt
-// the more rounds, the longer it takes
-// so the salt will be more secure
-// https://github.com/kelektiv/node.bcrypt.js#a-note-on-rounds
 const saltRounds = 10;
 
-const env = require("../env.json");
+const env = require("./env.json");
 const Pool = pg.Pool;
 const pool = new Pool(env);
 pool.connect().then(function () {
     console.log(`Connected to database ${env.database}`);
 });
 
-app.use(express.static("public"));
+// app.use(express.static("public"));
 app.use(express.json());
 app.use(cors());
-
-console.log("dcm");
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", function (req, res) {
-  console.log("dcm");
+  console.log(req.query);
   res.status(200);
   res.json({"name":"tin", "product_id": "123456"});
 })
