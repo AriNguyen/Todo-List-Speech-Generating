@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+input[type=text], input[type=password] {
+  padding: 5px 10px;
+  margin: 2px;
+  display: block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
