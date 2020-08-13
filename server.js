@@ -19,13 +19,13 @@ pool.connect().then(function () {
 // app.use(express.static("public"));
 app.use(express.json());
 app.use(cors());
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-app.get("/", function (req, res) {
-  console.log(req.query);
+app.post("/test", function (req, res) {
+  console.log(req.body);
   res.status(200);
-  res.json({"name":"tin", "product_id": "123456"});
+  res.send({"username":req.body.username, "password": req.body.password});
 })
 
 app.post("/user", function (req, res) {
