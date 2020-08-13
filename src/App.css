@@ -37,20 +37,42 @@
   }
 }
 
-input[type=text], input[type=password] {
-  position: relative;
-  padding: 5px 5px;
-  margin: 2px;
-  display: block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
+form[name="authinfo"]{
+overflow: hidden;
+margin: auto;
 }
 
 .container{
-  position: relative;
-  left: auto;
-  padding: 10px;
+  text-align: auto;
   margin: 5px;
-  border: 5px solid black;
-  justify-content: center;
+}
+
+#user,#password{
+  padding: 5px 5px;
+  margin: 2px;
+  display: block;
+  box-sizing: border-box;
+}
+.auth{
+  position: relative;
+  box-sizing: border-box;
+  left: 40%;
+  margin:auto;
+}
+
+#login {
+  color: black;
+  padding: 5px;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 80px;
+  transition: 0.3s;
+}
+
+/* Add a hover effect for buttons */
+#login:hover {
+  opacity: 0.8;
+  background-color: rgb(26, 131, 192);
 }

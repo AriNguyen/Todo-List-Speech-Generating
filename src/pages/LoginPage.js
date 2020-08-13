@@ -46,6 +46,7 @@ class LoginPage extends React.Component {
   render(){
 
     return (
+<<<<<<< HEAD
       <div>
         <form class="container" onSubmit={this.handleSubmit}>
           <label for="username">Username</label>
@@ -72,6 +73,23 @@ class LoginPage extends React.Component {
           </button>
         </form>
       </div>
+=======
+        <div class="form">
+            <form name="authinfo">
+                <div class="container">
+                    <div class="auth">
+                        <label>Username</label>
+                        <input type="text" placeholder="Enter Username" id="user"></input>
+                    </div>
+                    <div class="auth">
+                        <label>Password</label>
+                        <input type="password" placeholder="Enter Password" id="password"></input>
+                        <button type="submit" id="login">Sign in</button>
+                    </div>               
+                </div>
+            </form>
+        </div>
+>>>>>>> dccaeb6533c2db9c115a7b2484a4fe2c419b2b68
     );
     console.log(this);
   }
