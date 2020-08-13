@@ -46,50 +46,36 @@ class LoginPage extends React.Component {
   render(){
 
     return (
-<<<<<<< HEAD
-      <div>
-        <form class="container" onSubmit={this.handleSubmit}>
-          <label for="username">Username</label>
-          <input
-            name="username"
-            type="text"
-            placeholder="Enter Username"
-            id="user"
-            value={this.state.username}
-            onChange={this.handleChange}
-          ></input>
+      <div class="form">
+        <form name="authinfo" class="container" onSubmit={this.handleSubmit}>
+          <div class="auth">
 
-          <label for="password">Password</label>
-          <input
-            name="password"
-            type="password"
-            placeholder="Enter Password"
-            id="password"
-            value={this.state.password}
-            onChange={this.handleChange}
-          ></input>
-          <button id="login" type="submit">
-          Sign in
-          </button>
+            <label for="username">Username</label>
+            <input
+              name="username"
+              type="text"
+              placeholder="Enter Username"
+              id="user"
+              value={this.state.username}
+              onChange={this.handleChange}
+            />
+
+            <label for="password">Password</label>
+            <input
+              name="password"
+              type="password"
+              placeholder="Enter Password"
+              id="password"
+              value={this.state.password}
+              onChange={this.handleChange}
+            />
+            <button id="login" type="submit">
+            Sign in
+            </button>
+          </div>
         </form>
       </div>
-=======
-        <div class="form">
-            <form name="authinfo">
-                <div class="container">
-                    <div class="auth">
-                        <label>Username</label>
-                        <input type="text" placeholder="Enter Username" id="user"></input>
-                    </div>
-                    <div class="auth">
-                        <label>Password</label>
-                        <input type="password" placeholder="Enter Password" id="password"></input>
-                        <button type="submit" id="login">Sign in</button>
-                    </div>               
-                </div>
-            </form>
-        </div>
->>>>>>> dccaeb6533c2db9c115a7b2484a4fe2c419b2b68
+
     );
     console.log(this);
   }
