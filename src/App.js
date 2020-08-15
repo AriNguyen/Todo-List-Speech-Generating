@@ -1,24 +1,39 @@
 import React from 'react';
+import DarkTheme, { createTheme } from 'react-dark-theme'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Container, Navbar, Nav } from 'react-bootstrap';
-import styled from "@emotion/styled";
 import './App.css';
 
-import { useTheme } from "./components/ThemeContext";
 import Footer from './components/Footer';
+import SideBar from './components/SideBar';
 
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 
-const Wrapper = styled("div")`
-  background: ${props => props.theme.background};
-  width: 100vw;
-  height: 100vh;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen";
-  h1 {
-    color: ${props => props.theme.body};
-  }
-`;
+const white = "#FFFFFF";
+const black = "#272b34";
+const gray_black = "#272b34";
+const gray_black2 = "#393c47";
+const gray = "#F8F8F9";
+const dark_black = "#202229";
+
+const lightTheme = {
+  background: white,
+  text: black,
+  secondary: white,
+  third: black,
+}
+
+const darkTheme = {
+  background: gray_black,
+  text: white,
+  secondary: dark_black,
+  third: dark_black,
+}
+
+const myTheme = createTheme(darkTheme, lightTheme)
+
+
 
 class App extends React.Component {
   constructor(props) {
@@ -26,7 +41,7 @@ class App extends React.Component {
     this.state = {
       title: 'Todo List',
       headerLinks: [
-        { title: 'Home', path: '/' },
+        { title: 'DashBoard', path: '/' },
         { title: 'Login', path: '/login' },
       ],
       home: {
@@ -37,30 +52,22 @@ class App extends React.Component {
         title: 'Login'
       },
     }
-  }
-
   render() {
     return (
       <Router>
-        <Container className='p-0' fluid={true}>
-
-          <Navbar className="border-bottom" bg='transparent' expand='lg'>
+        <Container className='p-0' fluid={true} style={{ backgroundColor: myTheme.background, color: myTheme.text }}>
+          <Navbar className="" bg='transparent' expand='lg'>
             <Navbar.Brand>Todo List</Navbar.Brand>
             <Navbar.Toggle aria-controls="navbar-toggle" className="border-0" />
             <Navbar.Collapse id="navbar-toggle">
               <Nav className='ml-auto'>
-                <Link className='nav-link' to='/'>Home</Link>
+                <Link className='nav-link' to='/'>Dashboard</Link>
                 <Link className='nav-link' to='/login'>Login</Link>
               </Nav>
-              {/* <Wrapper>
-                <div>
-                  <button onClick={() => this.theme.toggle()}>
-                    {this.theme.dark ? "Switch to Light Mode" : "Switch to Dark Mode"}
-                  </button>
-                </div>
-              </Wrapper> */}
+              <DarkTheme light={lightTheme} dark={darkTheme} />
             </Navbar.Collapse>
           </Navbar>
+          
 
           <Route path="/" exact render={() => <HomePage title={this.state.home.title} />} subTitle={this.state.home.subTitle} />
           <Route path="/login" exact render={() => <LoginPage title={this.state.login.title} data={this.state}/>} />
