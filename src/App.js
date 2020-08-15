@@ -31,8 +31,7 @@ const darkTheme = {
   third: dark_black,
 }
 
-const myTheme = createTheme(darkTheme, lightTheme)
-
+const myTheme = createTheme(darkTheme, lightTheme);
 
 
 class App extends React.Component {
@@ -53,7 +52,8 @@ class App extends React.Component {
       },
     }
   }
-  
+
+ 
   render() {
     return (
       <Router>
