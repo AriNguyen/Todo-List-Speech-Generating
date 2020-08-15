@@ -70,13 +70,56 @@ class LoginPage extends React.Component {
               value={this.state.password}
               onChange={this.handleChange}
             />
-            <button id="login" type="submit">
+            <button id="login" type="submit" class="button">
               Log in
+            </button>
+            <button class="button">
+              Sign up
             </button>
           </div>
           <div ref="message" className="auth"/>
         </form>
 
+
+
+
+        <form name="register" className="container" onSubmit={this.handleSubmit}>
+          <div className="auth">
+            <label htmlFor="username">Username</label>
+            <input
+              name="username"
+              type="text"
+              placeholder="Enter Username (1-20)"
+              id="newUser"
+//              value={this.state.username}
+//              onChange={this.handleChange}
+            />
+
+            <label htmlFor="password">Password</label>
+            <input
+              name="password"
+              type="password"
+              placeholder="Enter Password (5-30)"
+              id="newPassword"
+//              value={this.state.password}
+//              onChange={this.handleChange}
+            />
+
+            <label htmlFor="confirm">Confirm Password</label>
+            <input
+              name="cPassword"
+              type="password"
+              placeholder="Re-enter Password (5-30)"
+              id="cPassword"
+//              value={this.state.password}
+//              onChange={this.handleChange}
+            />
+            <button class="button">
+              Sign up
+            </button>
+          </div>
+          <div ref="message" className="auth"/>
+        </form>
 
     </div>
     );
