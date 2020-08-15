@@ -8,13 +8,13 @@ function Footer() {
     return (
         <footer className='mt-5'>
             <Container fluid={true}>
-                <Row className="border-top justify-content-between p-3">
-                    <Col className="p-0" md={3} sm={12}>
+                <Row className="justify-content-between p-3">
+                    {/* <Col className="p-0" md={3} sm={12}>
                         Todo List
                     </Col>
                     <Col className="p-0 d-flex justify-content-end" md={3}>
                         A website to generates todo-list dashboard with speech generating
-                    </Col>
+                    </Col> */}
                 </Row>
             </Container>
         </footer>

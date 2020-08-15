@@ -5,6 +5,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 npm i emotion-theming
 npm i @emotion/styled
 npm i @emotion/core
+npm install --save react-dark-theme
 ```
 
 ## Available Scripts

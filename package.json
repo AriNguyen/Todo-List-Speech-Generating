@@ -17,9 +17,11 @@
     "pg": "^8.3.0",
     "react": "^16.13.1",
     "react-bootstrap": "^1.3.0",
+    "react-dark-theme": "^1.1.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1"
+    "react-scripts": "^3.4.2",
+    "rsuite": "^4.8.0"
   },
   "scripts": {
     "start": "react-scripts start",
