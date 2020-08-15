@@ -46,31 +46,12 @@ class App extends React.Component {
       ],
       home: {
         title: 'Todo List',
-        subTitle: 'Speech Generating Taks'
+        subTitle: 'Speech Generating Task'
       },
       login: {
         title: 'Login'
       },
     }
-
-  }
-
-  // componentDidMount() {
-  //   this.getProduct();
-  // }
-
-  // getProduct = () => {
-  //   fetch("http://localhost:3000", {
-  //     mode: 'no-cors',
-  //   })
-  //     .then(response => response.json())
-  //     .then(response => console.log(response))
-  //     .catch(err => console.error(err))
-  // }
-
-  // renderProduct = ({ product_id, name }) => <div> name </div>
-
-
   render() {
     return (
       <Router>
@@ -89,7 +70,7 @@ class App extends React.Component {
           
 
           <Route path="/" exact render={() => <HomePage title={this.state.home.title} />} subTitle={this.state.home.subTitle} />
-          <Route path="/login" exact render={() => <LoginPage title={this.state.login.title} />} />
+          <Route path="/login" exact render={() => <LoginPage title={this.state.login.title} data={this.state}/>} />
 
           <Footer />
 
