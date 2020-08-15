@@ -1,13 +1,17 @@
 const pg = require("pg");
-const bcrypt = require("bcrypt");
-const express = require("express");
-const app = express();
 const cors = require("cors");
-const port = 4000;
-const hostname = "localhost";
 const bodyParser = require('body-parser');
 
+const express = require("express");
+const app = express();
+const port = 4000;
+const hostname = "localhost";
+
+const bcrypt = require("bcrypt");
 const saltRounds = 10;
+
+const jwt = require("jwt-simple");
+const secret = "finalProject";
 
 const env = require("./env.json");
 const Pool = pg.Pool;
@@ -88,6 +92,7 @@ app.post("/user", function (req, res) {
 app.post("/auth", function (req, res) {
     let username = req.body.username;
     let password = req.body.password;
+
     pool.query("SELECT hashed_password FROM users WHERE username = $1", [username])
     .then(function (response) {
       if (response.rows.length === 0) {
@@ -100,6 +105,8 @@ app.post("/auth", function (req, res) {
       .then(function (isSame) {
           if (isSame) {
             // password matched
+            let payload = username;
+            var token = jwt.encode(payload, secret);
             res.status(200).send();
           } else {
             // password didn't match

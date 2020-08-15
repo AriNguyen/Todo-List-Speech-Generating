@@ -8,11 +8,10 @@ class LoginPage extends React.Component {
     this.state = {
       username: '',
       password: '',
+      message: '',
     }
-
     // this.handleChange = this.handleChange.bind(this);
     // this.handleSubmit = this.handleSubmit.bind(this);
-
   }
 
   handleChange = e => {
@@ -76,8 +75,6 @@ class LoginPage extends React.Component {
           </div>
           <div ref="message" className="auth"/>
         </form>
-
-
     </div>
     );
   }
