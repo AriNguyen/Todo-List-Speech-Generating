@@ -1,14 +1,30 @@
 import React from 'react';
 import Carousel from '../components/Carousel'
+import SideBar from '../components/SideBar'
+
 import "../App.css";
+import Calendar from 'react-calendar';
 
-function HomePage(props) {
+class HomePage extends React.Component {
 
-    return (
+
+    state = {
+        date: new Date(),
+    }
+    
+    onChange = date => this.setState({ date })
+    
+    render() {
+        return (
         <div>
+            <SideBar />
             <Carousel />
         </div>
-    );
+        );
+    }
+
+
+
 }
 
 export default HomePage;

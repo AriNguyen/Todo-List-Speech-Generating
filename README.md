@@ -1,5 +1,13 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Installation
+```shell
+npm i emotion-theming
+npm i @emotion/styled
+npm i @emotion/core
+npm install --save react-dark-theme
+```
+
 ## Available Scripts
 
 In the project directory, you can run:
