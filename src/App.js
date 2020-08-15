@@ -52,6 +52,8 @@ class App extends React.Component {
         title: 'Login'
       },
     }
+  }
+  
   render() {
     return (
       <Router>
