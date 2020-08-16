@@ -49,8 +49,6 @@ class DashboardPage extends React.Component {
                 <Container className="h-100" style={{ backgroundColor: myTheme.background, color: myTheme.text }}>
                     <SideBar backgroundColor={myTheme.secondary} color={myTheme.text} />
                     <Container>
-                        <NavBar lightTheme={lightTheme} darkTheme={darkTheme} />
-
                         <Header>
                             {/* <h2>Page Title</h2> */}
                         </Header>
@@ -65,6 +63,8 @@ class DashboardPage extends React.Component {
                                 <Carousel />
                             </Col>
                             <Col sm={3}>
+                                <NavBar lightTheme={lightTheme} darkTheme={darkTheme} />
+
                                 <div id="calendar">
                                     <Calendar
                                         onChange={this.onChange}
