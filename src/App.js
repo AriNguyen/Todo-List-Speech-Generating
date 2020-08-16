@@ -5,29 +5,6 @@ import { Container } from 'react-bootstrap';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 
-const white = "#FFFFFF";
-const black = "#272b34";
-const gray_black = "#272b34";
-const gray_black2 = "#393c47";
-const gray = "#F8F8F9";
-const dark_black = "#202229";
-
-const lightTheme = {
-  background: white,
-  text: black,
-  secondary: white,
-  third: black,
-}
-
-const darkTheme = {
-  background: gray_black,
-  text: white,
-  secondary: dark_black,
-  third: dark_black,
-}
-
-const myTheme = createTheme(darkTheme, lightTheme);
-
 
 class App extends React.Component {
   constructor(props) {
