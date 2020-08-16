@@ -8,7 +8,7 @@ import TodoApp from '../components/TodoApp'
 import SideBar from '../components/SideBar'
 import NavBar from '../components/Navbar'
 
-import {DarkTheme, createTheme} from 'react-dark-theme'
+import { DarkTheme, createTheme } from 'react-dark-theme'
 
 const white = "#FFFFFF";
 const black = "#272b34";
@@ -57,9 +57,20 @@ class DashboardPage extends React.Component {
 
                         <Row>
                             <Col sm={9}>
+                                <div id="taskInfo">
+                                    <textarea id="textbox" rows="4" cols="50"></textarea>
+                                    <button class="button" type="submit">Voice Recognition</button>
+                                    <button class="button" type="submit">Submit</button>
+                                </div>
                                 <Carousel />
                             </Col>
                             <Col sm={3}>
+                                <div id="calendar">
+                                    <Calendar
+                                        onChange={this.onChange}
+                                        value={this.state.date}
+                                    />
+                                </div>
                                 {/* <TodoApp initItems={todoItems} /> */}
                             </Col>
                         </Row>
