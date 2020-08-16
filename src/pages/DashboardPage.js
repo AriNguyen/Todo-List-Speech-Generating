@@ -13,7 +13,7 @@ import { createTheme } from 'react-dark-theme'
 const white = "#FFFFFF";
 const black = "#272b34";
 const gray_black = "#272b34";
-const gray_black2 = "#393c47";
+// const gray_black2 = "#393c47";
 const gray = "#F8F8F9";
 const dark_black = "#202229";
 
