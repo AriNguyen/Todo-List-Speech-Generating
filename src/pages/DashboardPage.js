@@ -6,9 +6,9 @@ import { Header, Container } from 'rsuite';
 import Carousel from '../components/Carousel'
 import TodoApp from '../components/TodoApp'
 import SideBar from '../components/SideBar'
-import NavBar from '../components/Navbar'
+import DarkModeToggle from '../components/DarkModeToggle'
 
-import { DarkTheme, createTheme } from 'react-dark-theme'
+import { createTheme } from 'react-dark-theme'
 
 const white = "#FFFFFF";
 const black = "#272b34";
@@ -30,6 +30,11 @@ const darkTheme = {
     secondary: dark_black,
     third: dark_black,
 }
+
+var todoItems = [];
+todoItems.push({ index: 1, value: "learn react", done: false });
+todoItems.push({ index: 2, value: "Go shopping", done: true });
+todoItems.push({ index: 3, value: "buy flowers", done: true });
 
 
 class DashboardPage extends React.Component {
@@ -63,15 +68,15 @@ class DashboardPage extends React.Component {
                                 <Carousel />
                             </Col>
                             <Col sm={3}>
-                                <NavBar lightTheme={lightTheme} darkTheme={darkTheme} />
+                                <DarkModeToggle lightTheme={lightTheme} darkTheme={darkTheme} />
 
-                                <div id="calendar">
+                                <div id="calendar" className="p-0">
                                     <Calendar
                                         onChange={this.onChange}
                                         value={this.state.date}
                                     />
                                 </div>
-                                {/* <TodoApp initItems={todoItems} /> */}
+                                <TodoApp initItems={todoItems} />
                             </Col>
                         </Row>
                     </Container>
