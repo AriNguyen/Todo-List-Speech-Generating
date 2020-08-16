@@ -10,6 +10,15 @@ body {
 body {
   background-color: var(--background);
   color: var(--text);
+  height: 100%;
+}
+
+body > #root > div {
+  height: 100vh;
+}
+
+.vheight_100 {
+  height: 100vh !important;
 }
 
 code {
