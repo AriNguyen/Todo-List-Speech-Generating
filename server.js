@@ -26,11 +26,29 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.post("/test", function (req, res) {
-  console.log(req.body);
-  res.status(200);
-  res.send({"username":req.body.username, "password": req.body.password});
-})
+app.get("/status", function (req, res) {
+  // See if the X-Auth header is set
+   if (!req.headers["x-auth"]) {
+      res.status(401).json({error: "Missing X-Auth header"});
+   }
+
+   // X-Auth should contain the token
+   var token = req.headers["x-auth"];
+   try {
+      var decoded = jwt.decode(token, secret);
+      console.log(decoded);
+   //    pool.query("SELECT username FROM users WHERE username = $1", [username])
+   //    .then( function (response) {
+   //      if( response.rows.length === 0 ){
+   //      }else{
+   //        res.status(200).json({username: })
+   //      }
+   //    });
+   }
+   catch (ex) {
+    res.status(401).json({ error: "Invalid JWT" });
+   }
+});
 
 app.post("/user", function (req, res) {
   console.log(req.body);
@@ -105,9 +123,8 @@ app.post("/auth", function (req, res) {
       .then(function (isSame) {
           if (isSame) {
             // password matched
-            let payload = username;
-            var token = jwt.encode(payload, secret);
-            res.status(200).send();
+            var token = jwt.encode({username: username}, secret);
+            res.status(200).json({'token': token});
           } else {
             // password didn't match
             res.status(401).send();

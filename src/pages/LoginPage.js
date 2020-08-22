@@ -21,27 +21,44 @@ class LoginPage extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     // fetch to /user to create new account, to /auth to verify login info
-    fetch('/auth', {
-      method: 'POST',
+    fetch("/status", {
+      method: 'GET',
       headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        'username': this.state.username,
-        'password': this.state.password,
-      }),
-    })
-    .then( res => {
-      console.log(res.status);
-      let msg;
-      if( res.status === 200 ){
-        msg = (<p>Logging in</p>);
-      }else{
-        msg = (<p>Invalid username/password</p>);
+        "x-auth": window.localStorage.getItem("token")
       }
-      ReactDOM.render(msg, this.refs.message);
     })
-    .catch(err => console.error(err));
+    .then( data => {
+      console.log(data);
+    })
+
+    // fetch('/auth', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({
+    //     'username': this.state.username,
+    //     'password': this.state.password,
+    //   }),
+    // })
+    // .then( res => {
+    //   console.log(res.status);
+    //   let msg;
+    //   if( res.status === 200 ){
+    //     msg = (<p>Logging in</p>);
+    //   }else{
+    //     msg = (<p>Invalid username/password</p>);
+    //   }
+    //   ReactDOM.render(msg, this.refs.message);
+    //   return res.json();
+    // })
+    // .then( data => {
+    //   console.log(data);
+    //   if (data.token) {
+    //      window.localStorage.setItem("token", data.token);
+    //   }
+    // })
+    // .catch(err => console.error(err));
   }
 
   render(){
