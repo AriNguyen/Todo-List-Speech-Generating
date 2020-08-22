@@ -25,11 +25,8 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.3",
-<<<<<<< HEAD
-    "react-toggle-display": "^2.2.1",
-=======
     "react-spring": "^8.0.27",
->>>>>>> a82ef0a80d3850b355bf7f45c125323ab69aab49
+    "react-toggle-display": "^2.2.1",
     "rsuite": "^4.8.0"
   },
   "scripts": {

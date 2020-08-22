@@ -16,13 +16,13 @@ class LoginPage extends React.Component {
 
   }
   handleClick() {
-    if (this.state.show === "hide"){
+    if (this.state.display === "hide"){
       this.setState({
-        display: this.state.show = "show"
+        display: this.state.display = "show"
       })
     }else{
       this.setState({
-        display: this.state.show = "hide"
+        display: this.state.display = "hide"
       })
     }
   }
@@ -95,7 +95,7 @@ class LoginPage extends React.Component {
 
 
 
-          <form name="register" className={this.state.show} onSubmit={this.handleSubmit}>
+          <form name="register" className={this.state.display} onSubmit={this.handleSubmit}>
             <div className="auth">
               <label htmlFor="username">Username</label>
               <input

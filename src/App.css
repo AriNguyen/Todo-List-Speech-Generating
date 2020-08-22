@@ -57,6 +57,12 @@ margin: auto;
   text-align: auto;
   margin: 5px;
 }
+.label{
+  display: inline;
+}
+.task{
+  display: inline;
+}
 #user,#password, #newUser, #newPassword, #cPassword{
   padding: 5px 5px;
   margin: 2px;

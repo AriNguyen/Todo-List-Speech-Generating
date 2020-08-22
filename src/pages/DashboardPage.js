@@ -47,6 +47,32 @@ class DashboardPage extends React.Component {
 
     onChange = date => this.setState({ date })
 
+    speechRecognition = function(){
+        window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
+        let finalTranscript = '';
+        let recognition = new window.SpeechRecognition();
+
+        recognition.interimResults = true;
+        recognition.maxAlternatives = 10;
+        recognition.continuous = true;
+
+        recognition.onresult = (event) => {
+        let interimTranscript = '';
+        for (let i = event.resultIndex, len = event.results.length; i < len; i++) {
+            let transcript = event.results[i][0].transcript;
+            if (event.results[i].isFinal) {
+                finalTranscript += transcript;
+            } else {
+                interimTranscript += transcript;
+            }
+        }
+
+        //document.querySelector('body').innerHTML = finalTranscript + '<i style="color:#ddd;">' + interimTranscript + '</>';
+        document.getElementById("textbox").innerHTML = finalTranscript + '' + interimTranscript;        
+        }
+        recognition.start();
+    }
+
     render() {
         let myTheme = createTheme(darkTheme, lightTheme);
         return (
@@ -61,8 +87,12 @@ class DashboardPage extends React.Component {
                         <Row>
                             <Col sm={9}>
                                 <div id="taskInfo">
-                                    <textarea id="textbox" rows="4" cols="50"></textarea>
-                                    <button class="button" type="submit">Voice Recognition</button>
+                                    <div id="task-container">
+                                        
+                                        <label for="textbox" class="label">Task</label>
+                                        <textarea class="task content" rows="4" cols="50"></textarea>
+                                    </div>
+                                    <button class="button" type="submit" onClick={this.speechRecognition}>Voice Recognition</button>
                                     <button class="button" type="submit">Submit</button>
                                 </div>
                                 <Carousel />
