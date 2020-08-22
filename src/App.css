@@ -42,12 +42,28 @@ overflow: hidden;
 margin: auto;
 }
 
+/* -------Authentication area----------- */
+#taskInfo{
+  overflow: hidden;
+}
 .container{
   text-align: auto;
   margin: 5px;
 }
-
-#user,#password{
+.hide{
+  display: none;
+}
+.show{
+  text-align: auto;
+  margin: 5px;
+}
+.label{
+  display: inline;
+}
+.task{
+  display: inline;
+}
+#user,#password, #newUser, #newPassword, #cPassword{
   padding: 5px 5px;
   margin: 2px;
   display: block;
