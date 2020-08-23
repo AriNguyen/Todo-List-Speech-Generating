@@ -1,13 +1,25 @@
 import React from 'react';
-import ReactDOM, { render } from 'react-dom'
-import { Sidenav, Icon, Dropdown, Nav, Toggle } from 'rsuite';
+import { Sidenav, Sidebar, Icon, Dropdown, Nav } from 'rsuite';
+
+const headerStyles = {
+    padding: 18,
+    fontSize: 16,
+    height: 56,
+    background: '#34c3ff',
+    color: ' #fff',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden'
+};
+
 
 class SideBar extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             expanded: false,
-            activeKey: '1'
+            activeKey: '1',
+            backgroundColor: props.backgroundColor,
+            color: props.color
         };
         this.handleToggle = this.handleToggle.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
@@ -24,31 +36,52 @@ class SideBar extends React.Component {
     }
     render() {
         const { expanded } = this.state;
-
+        let new_style = {backgroundColor: this.state.backgroundColor, color: this.state.color};
+        console.log(new_style);
         return (
-            <Sidenav expanded={expanded} defaultOpenKeys={['3', '4']} activeKey={this.state.activeKey} onSelect={this.handleSelect}>
-                <Sidenav.Body>
-                    <Nav>
-                        <Nav.Item eventKey="1" icon={<Icon icon="dashboard" /> } to="/">Dashboard</Nav.Item>
-                        <Nav.Item eventKey="2" icon={<Icon icon="group" />}>User Group</Nav.Item>
-                        <Dropdown placement="rightStart" eventKey="3" itle="Advanced"icon={<Icon icon="magic" />}>
-                            <Dropdown.Item eventKey="3-1">Geo</Dropdown.Item>
-                            <Dropdown.Item eventKey="3-2">Devices</Dropdown.Item>
-                            <Dropdown.Item eventKey="3-3">Loyalty</Dropdown.Item>
-                            <Dropdown.Item eventKey="3-4">Visit Depth</Dropdown.Item>
-                        </Dropdown>
-                        <Dropdown placement="rightStart" eventKey="4" title="Settings" icon={<Icon icon="gear-circle" />}>
-                            <Dropdown.Item eventKey="4-1">Applications</Dropdown.Item>
-                            <Dropdown.Item eventKey="4-2">Channels</Dropdown.Item>
-                            <Dropdown.Item eventKey="4-3">Versions</Dropdown.Item>
-                            <Dropdown.Menu eventKey="4-5" title="Custom Action">
-                                <Dropdown.Item eventKey="4-5-1">Action Name</Dropdown.Item>
-                                <Dropdown.Item eventKey="4-5-2">Action Params</Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown>
-                    </Nav>
-                </Sidenav.Body>
-            </Sidenav>
+            <Sidebar
+                style={{ display: 'flex', flexDirection: 'column' }}
+                width={expanded ? 260 : 56}
+                collapsible
+            >
+                <Sidenav.Header>
+                    <div style={headerStyles}>
+                        <Icon icon="avatar" size="lg" style={{ verticalAlign: 0 }} />
+                        <span style={{ marginLeft: 12 }}> NAME</span>
+                    </div>
+                </Sidenav.Header>
+
+                <Sidenav
+                    expanded={expanded}
+                    defaultOpenKeys={['3']}
+                    appearance="subtle"
+                    style={new_style}
+                >
+                    <Sidenav.Body>
+                        <Nav>
+                            {/* DashBoard */}
+                            <Nav.Item eventKey="1" icon={<Icon icon="dashboard" />} to="/dashboard">Dashboard</Nav.Item>
+
+                            {/* My List */}
+                            <Nav.Item eventKey="2" icon={<Icon icon="list" />}>My List</Nav.Item>
+
+                            {/* My Calendar */}
+                            <Nav.Item eventKey="3" icon={<Icon icon="calendar" />}>My Calendar</Nav.Item>
+
+                            {/* Settings */}
+                            <Dropdown placement="rightStart" eventKey="4" title="Settings" icon={<Icon icon="gear-circle" />}>
+                                <Dropdown.Item eventKey="4-1">Applications</Dropdown.Item>
+                                <Dropdown.Item eventKey="4-2">Channels</Dropdown.Item>
+                                <Dropdown.Item eventKey="4-3">Versions</Dropdown.Item>
+                                <Dropdown.Menu eventKey="4-5" title="Custom Action">
+                                    <Dropdown.Item eventKey="4-5-1">Action Name</Dropdown.Item>
+                                    <Dropdown.Item eventKey="4-5-2">Action Params</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+                        </Nav>
+                    </Sidenav.Body>
+                </Sidenav>
+            </Sidebar>
         );
     }
 }
