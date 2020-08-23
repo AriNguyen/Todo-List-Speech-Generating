@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const port = 4000;
+const port = 3000;
 const hostname = "localhost";
 const bodyParser = require('body-parser');
 
@@ -19,34 +19,34 @@ pool.connect().then(function () {
 // app.use(express.static("public"));
 app.use(express.json());
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post("/test", function (req, res) {
-  console.log(req.body);
+app.get("/", function (req, res) {
+  console.log(req.query);
   res.status(200);
-  res.send({"username":req.body.username, "password": req.body.password});
+  res.json({"name":"tin", "product_id": "123456"});
 })
 
 app.post("/user", function (req, res) {
-  console.log(req.body);
-  let username = req.body.username;
-  let password = req.body.password;
 
-  if( username == undefined || password == undefined ){
-    // body must have username and password keys
+  let username = req.body.username;
+  let plaintextPassword = req.body.plaintextPassword;
+
+  if( username == undefined || plaintextPassword == undefined ){
+    // TODO check body has username and plaintextPassword keys
     res.status(401);
     res.send();
-  }else if( !(typeof username === 'string') || !(typeof password === 'string') ){
+  }else if( !(typeof username === 'string') || !(typeof plaintextPassword === 'string') ){
     // check if username and password are strings
     res.status(401);
     res.send();
   }else if( username.length < 1 || username.length > 20 ){
-    // check if username length >= 1 and <= 20
+    // TODO check username length >= 1 and <= 20
     res.status(401);
     res.send();
-  }else if( password.length < 5 || password > 30 ){
-    // check if password length >= 5 and <= 36
+  }else if( plaintextPassword.length < 5 || plaintextPassword > 36 ){
+    // TODO check password length >= 5 and <= 36
     res.status(401);
     res.send();
   }
@@ -55,40 +55,39 @@ app.post("/user", function (req, res) {
   pool.query("SELECT username FROM users WHERE username = $1", [username])
   .then( function (user) {
     if( user.rows.length !== 0 ){
-      console.log("existed user")
-      res.status(401).send();
-    }else{
-      bcrypt
-        .hash(password, saltRounds)
-        .then(function (hashedPassword) {
-          pool.query(
-            "INSERT INTO users (username, hashed_password) VALUES ($1, $2)",
-            [username, hashedPassword]
-          )
-          .then(function (response) {
-            // account successfully created
-            console.log("added user to auth_db")
-            res.status(200).send();
-          })
-          .catch(function (error) {
-            console.log(error);
-            res.status(500).send(); // server error
-          });
-        })
-        .catch(function (error) {
-          console.log(error);
-          res.status(500).send(); // server error
-        });
+      res.status(401);
+      res.send();
     }
   });
 
-
+  bcrypt
+    .hash(plaintextPassword, saltRounds)
+    .then(function (hashedPassword) {
+      pool.query(
+        "INSERT INTO users (username, hashed_password) VALUES ($1, $2)",
+        [username, hashedPassword]
+      )
+      .then(function (response) {
+        // account successfully created
+        res.status(200).send();
+      })
+      .catch(function (error) {
+        console.log(error);
+        res.status(500).send(); // server error
+      });
+    })
+    .catch(function (error) {
+      console.log(error);
+      res.status(500).send(); // server error
+    });
 });
 
 app.post("/auth", function (req, res) {
     let username = req.body.username;
-    let password = req.body.password;
-    pool.query("SELECT hashed_password FROM users WHERE username = $1", [username])
+    let plaintextPassword = req.body.plaintextPassword;
+    pool.query("SELECT hashed_password FROM users WHERE username = $1", [
+        username,
+    ])
     .then(function (response) {
       if (response.rows.length === 0) {
         // username doesn't exist
@@ -96,7 +95,7 @@ app.post("/auth", function (req, res) {
       }
       let hashedPassword = response.rows[0].hashed_password;
       bcrypt
-      .compare(password, hashedPassword)
+      .compare(plaintextPassword, hashedPassword)
       .then(function (isSame) {
           if (isSame) {
             // password matched
