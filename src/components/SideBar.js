@@ -70,13 +70,9 @@ class SideBar extends React.Component {
 
                             {/* Settings */}
                             <Dropdown placement="rightStart" eventKey="4" title="Settings" icon={<Icon icon="gear-circle" />}>
-                                <Dropdown.Item eventKey="4-1">Applications</Dropdown.Item>
-                                <Dropdown.Item eventKey="4-2">Channels</Dropdown.Item>
-                                <Dropdown.Item eventKey="4-3">Versions</Dropdown.Item>
-                                <Dropdown.Menu eventKey="4-5" title="Custom Action">
-                                    <Dropdown.Item eventKey="4-5-1">Action Name</Dropdown.Item>
-                                    <Dropdown.Item eventKey="4-5-2">Action Params</Dropdown.Item>
-                                </Dropdown.Menu>
+                                <Dropdown.Item eventKey="4-1">Account</Dropdown.Item>
+                                <Dropdown.Item eventKey="4-2">Customization</Dropdown.Item>
+                                <Dropdown.Item eventKey="4-3">Sign Out</Dropdown.Item>
                             </Dropdown>
                         </Nav>
                     </Sidenav.Body>
