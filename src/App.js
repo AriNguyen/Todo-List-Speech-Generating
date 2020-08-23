@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 
 import LoginPage from './pages/LoginPage';
@@ -25,7 +25,7 @@ class App extends React.Component {
     }
   }
 
- 
+
   render() {
     return (
       <Router>
@@ -37,6 +37,15 @@ class App extends React.Component {
     );
   }
 }
+
+// const App = () => (
+//   <Router>
+//     <Switch>
+//       <Route path="/" component={LoginPage} />
+//       <Route path="/dashboard" component={DashboardPage} />
+//     </Switch>
+//   </Router>
+// );
 
 
 export default App;

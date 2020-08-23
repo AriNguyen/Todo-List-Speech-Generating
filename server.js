@@ -68,7 +68,7 @@ app.post("/user", function (req, res) {
     res.status(401);
     res.send();
   }else if( password.length < 5 || password > 30 ){
-    // check if password length >= 5 and <= 36
+    // check if password length >= 5 and <= 30
     res.status(401);
     res.send();
   }
@@ -124,7 +124,7 @@ app.post("/auth", function (req, res) {
           if (isSame) {
             // password matched
             var token = jwt.encode({username: username}, secret);
-            res.status(200).json({'token': token});
+            res.status(302).json({'token': token});
           } else {
             // password didn't match
             res.status(401).send();
@@ -140,6 +140,7 @@ app.post("/auth", function (req, res) {
         res.status(500).send(); // server error
     });
 });
+
 
 
 app.listen(port, hostname, () => {

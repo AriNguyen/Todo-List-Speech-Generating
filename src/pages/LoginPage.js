@@ -2,17 +2,20 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import "../App.css";
 
+
+
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       username: '',
       password: '',
-      message: '',
+      newUsername: '',
+      newPassword: '',
+      cPassword: '',
       display: "hide",
+      redirect: null,
     }
-    // this.handleChange = this.handleChange.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleClick() {
     if (this.state.display === "hide"){
@@ -26,62 +29,80 @@ class LoginPage extends React.Component {
     }
   }
 
-
   handleChange = e => {
     this.setState({ [e.currentTarget.name]: e.target.value})
   }
 
-  handleSubmit = e => {
+  handleLogin = e => {
     e.preventDefault();
-    // fetch to /user to create new account, to /auth to verify login info
-    fetch("/status", {
-      method: 'GET',
+
+    fetch('/auth', {
+      method: 'POST',
+      redirect: 'follow',
       headers: {
-        "x-auth": window.localStorage.getItem("token")
+        'Content-Type': 'application/json',
+        'x-auth': window.localStorage.getItem("token")
+      },
+      body: JSON.stringify({
+        'username': this.state.username,
+        'password': this.state.password,
+      }),
+    })
+    .then( res => {
+      console.log(`Status: ${res.status}`);
+      if( res.status === 302 ){
+        console.log("Logging in");
+        window.location.href = `/dashboard?user=${this.state.username}`;
+      }else{
+        console.log("Invalid username/password");
       }
+      return res.json();
     })
     .then( data => {
       console.log(data);
+      if (data.token) {
+         window.localStorage.setItem("token", data.token);
+      }
     })
+    .catch(err => console.error(err));
+  }
 
-    // fetch('/auth', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     'username': this.state.username,
-    //     'password': this.state.password,
-    //   }),
-    // })
-    // .then( res => {
-    //   console.log(res.status);
-    //   let msg;
-    //   if( res.status === 200 ){
-    //     msg = (<p>Logging in</p>);
-    //   }else{
-    //     msg = (<p>Invalid username/password</p>);
-    //   }
-    //   ReactDOM.render(msg, this.refs.message);
-    //   return res.json();
-    // })
-    // .then( data => {
-    //   console.log(data);
-    //   if (data.token) {
-    //      window.localStorage.setItem("token", data.token);
-    //   }
-    // })
-    // .catch(err => console.error(err));
+  handleSignup = e => {
+    e.preventDefault();
+
+    if( this.state.newPassword != this.state.cPassword ){
+      console.log("Password doesn't match");
+      return;
+    }
+
+    fetch("/user", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-auth': window.localStorage.getItem("token")
+      },
+      body: JSON.stringify({
+        'username': this.state.newUsername,
+        'password': this.state.newPassword,
+      })
+    })
+    .then( res => {
+      console.log(res.status);
+      if( res.status === 401 ){
+        console.log("Invalid username/password or user already existed");
+      }
+    })
+    .catch( err => console.error(err));
   }
 
   render(){
 
     return (
       <div className="form">
-        <button class="button" onClick={ () => this.handleClick() }>
+        <button className="button" onClick={ () => this.handleClick() }>
               Sign up
         </button>
-        <form name="authinfo" className="container" onSubmit={this.handleSubmit}>
+        <form name="authinfo" className="container" onSubmit={this.handleLogin}>
           <div className="auth">
             <label htmlFor="username">Username</label>
             <input
@@ -102,57 +123,49 @@ class LoginPage extends React.Component {
               value={this.state.password}
               onChange={this.handleChange}
             />
-            <button id="login" type="submit" class="button">
+            <button id="login" type="submit" className="button">
               Log in
             </button>
           </div>
-          <div ref="message" className="auth"/>
         </form>
-<<<<<<< HEAD
-=======
 
+        <form name="register" className={this.state.display} onSubmit={this.handleSignup}>
+          <div className="auth">
+            <label htmlFor="username">Username</label>
+            <input
+              name="newUsername"
+              type="text"
+              placeholder="Enter Username (1-20)"
+              id="newUser"
+              value={this.state.newUsername}
+              onChange={this.handleChange.bind(this)}
+            />
 
+            <label htmlFor="password">Password</label>
+            <input
+              name="newPassword"
+              type="password"
+              placeholder="Enter Password (5-30)"
+              id="newPassword"
+              value={this.state.newPassword}
+              onChange={this.handleChange.bind(this)}
+            />
 
-          <form name="register" className={this.state.display} onSubmit={this.handleSubmit}>
-            <div className="auth">
-              <label htmlFor="username">Username</label>
-              <input
-                name="username"
-                type="text"
-                placeholder="Enter Username (1-20)"
-                id="newUser"
-  //              value={this.state.username}
-  //              onChange={this.handleChange}
-              />
-
-              <label htmlFor="password">Password</label>
-              <input
-                name="password"
-                type="password"
-                placeholder="Enter Password (5-30)"
-                id="newPassword"
-  //              value={this.state.password}
-  //              onChange={this.handleChange}
-              />
-
-              <label htmlFor="confirm">Confirm Password</label>
-              <input
-                name="cPassword"
-                type="password"
-                placeholder="Re-enter Password (5-30)"
-                id="cPassword"
-  //              value={this.state.password}
-  //              onChange={this.handleChange}
-              />
-              <button class="button">
-                Sign up
-              </button>
-            </div>
-            <div ref="message" className="auth"/>
-          </form>
-
->>>>>>> 8ff6110d6257d9c30b81d3a9234fc4e2b0087aa0
-    </div>
+            <label htmlFor="confirm">Confirm Password</label>
+            <input
+              name="cPassword"
+              type="password"
+              placeholder="Re-enter Password (5-30)"
+              id="cPassword"
+              value={this.state.cpassword}
+              onChange={this.handleChange}
+            />
+            <button className="button">
+              Sign up
+            </button>
+          </div>
+        </form>
+  </div>
     );
   }
 }
