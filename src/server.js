@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const express = require("express");
 const app = express();
 
-const port = 3000;
+const port = 4000;
 const hostname = "localhost";
 
 // number of rounds the bcrypt algorithm will use to generate the salt
