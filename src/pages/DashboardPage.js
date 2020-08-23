@@ -42,10 +42,23 @@ class DashboardPage extends React.Component {
         super(props);
         this.state = {
             date: new Date(),
+            display: "hide",
         }
     }
 
     onChange = date => this.setState({ date })
+
+    handleClick() {
+        if (this.state.display === "hide"){
+          this.setState({
+            display: this.state.display = "show"
+          })
+        }else{
+          this.setState({
+            display: this.state.display = "hide"
+          })
+        }
+      }
 
     speechRecognition = function(){
         window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
@@ -68,10 +81,12 @@ class DashboardPage extends React.Component {
         }
 
         //document.querySelector('body').innerHTML = finalTranscript + '<i style="color:#ddd;">' + interimTranscript + '</>';
-        document.getElementById("textbox").innerHTML = finalTranscript + '' + interimTranscript;        
+        document.getElementById("voice content").innerHTML = finalTranscript + '' + interimTranscript;        
         }
         recognition.start();
+        
     }
+    
 
     render() {
         let myTheme = createTheme(darkTheme, lightTheme);
@@ -86,17 +101,44 @@ class DashboardPage extends React.Component {
 
                         <Row>
                             <Col sm={9}>
-                                <div id="taskInfo">
+                                <div>
+                                    <button className="button out">Sign out</button>
                                     <div id="task-container">
+                                        <div id="taskInfo">
+                                            <label for="date" className="label">Date</label>
+                                            <input type="text" name="date"></input>
+                                            <label for="priority" className="label">Priority</label>
+                                            <select name="priority">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                            </select>
+                                            <label for="textbox" class="label">Task</label>
+                                            <textarea class="task content" rows="4" cols="50"></textarea>
+                                        </div>
+
+                                        <div className={`voice-container ${this.state.display}`}>
+                                            <div>
+                                                <label for="textbox" className="label">Voice content</label>
+                                                <textarea id="voice content" rows="4" cols="50"></textarea>
+                                            </div>
+                                            <button class="button start" type="submit" onClick={this.speechRecognition}>Start</button>
+                                            <button class="button stop" type="submit" >Stop</button>
+                                            <button class="button load" type="submit">Load</button>
                                         
-                                        <label for="textbox" class="label">Task</label>
-                                        <textarea class="task content" rows="4" cols="50"></textarea>
+                                        </div>
+
+                                        <button class="button voice" type="submit" onClick={ () => this.handleClick()}>Voice Recognition</button>
+                                        <button class="button submit" type="submit">Submit</button>
+
+                
                                     </div>
-                                    <button class="button" type="submit" onClick={this.speechRecognition}>Voice Recognition</button>
-                                    <button class="button" type="submit">Submit</button>
                                 </div>
                                 <Carousel />
                             </Col>
+
+
                             <Col sm={3}>
                                 <DarkModeToggle lightTheme={lightTheme} darkTheme={darkTheme} />
 

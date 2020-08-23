@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import "../App.css";
 
+
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
@@ -35,6 +36,7 @@ class LoginPage extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     // fetch to /user to create new account, to /auth to verify login info
+
     fetch('/auth', {
       method: 'POST',
       headers: {
@@ -62,7 +64,7 @@ class LoginPage extends React.Component {
 
     return (
       <div className="form">
-        <button class="button" onClick={ () => this.handleClick() }>
+        <button class="button" onClick={ () => this.handleClick()}>
               Sign up
         </button>
         <form name="authinfo" className="container" onSubmit={this.handleSubmit}>

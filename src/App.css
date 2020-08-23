@@ -43,26 +43,7 @@ margin: auto;
 }
 
 /* -------Authentication area----------- */
-#taskInfo{
-  overflow: hidden;
-}
-.container{
-  text-align: auto;
-  margin: 5px;
-}
-.hide{
-  display: none;
-}
-.show{
-  text-align: auto;
-  margin: 5px;
-}
-.label{
-  display: inline;
-}
-.task{
-  display: inline;
-}
+
 #user,#password, #newUser, #newPassword, #cPassword{
   padding: 5px 5px;
   margin: 2px;
@@ -87,6 +68,36 @@ margin: auto;
   transition: 0.3s;
 }
 
+
+/* -------Task-making area----------- */
+#taskInfo{
+  overflow: hidden;
+}
+.container{
+  text-align: auto;
+  margin: 5px;
+}
+.hide{
+  display: none;
+}
+.show{
+  text-align: auto;
+  margin: 5px;
+}
+.label{
+  display: block;
+  font-weight: bold;
+}
+#task-container{
+  padding: 10px;
+  margin-left: 50px;
+  border: 2px blue solid;
+
+}
+
+.voice-container{
+  display: inline;
+}
 /* Add a hover effect for buttons */
 #login:hover {
   opacity: 0.8;
@@ -108,5 +119,4 @@ margin: auto;
 #calendar{
   margin: 10px;
   padding: 10px;
-
 }
