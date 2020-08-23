@@ -3,7 +3,10 @@ import ReactDOM from 'react-dom';
 import "../App.css";
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 81597aaddc41ca9d100380b7209038f52d9b8783
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
@@ -35,6 +38,10 @@ class LoginPage extends React.Component {
 
   handleLogin = e => {
     e.preventDefault();
+<<<<<<< HEAD
+=======
+    // fetch to /user to create new account, to /auth to verify login info
+>>>>>>> 81597aaddc41ca9d100380b7209038f52d9b8783
 
     fetch('/auth', {
       method: 'POST',

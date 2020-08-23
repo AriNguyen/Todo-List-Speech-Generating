@@ -6,6 +6,8 @@ import "../App.css";
 import Calendar from 'react-calendar';
 
 class HomePage extends React.Component {
+
+
     state = {
         date: new Date(),
         hide: true,
@@ -38,6 +40,7 @@ class HomePage extends React.Component {
         }
         recognition.start();
     }
+    
     
     render() {
         return (
