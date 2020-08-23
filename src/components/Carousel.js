@@ -22,13 +22,6 @@ class Carousel extends React.Component {
                     link: '',
                     selected: false
                 },
-                {
-                    id: 2,
-                    title: '',
-                    subTitle: '',
-                    link: '',
-                    selected: false
-                },
             ]
         }
     }
