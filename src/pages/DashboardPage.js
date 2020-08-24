@@ -6,6 +6,7 @@ import { Header, Container } from 'rsuite';
 import Carousel from '../components/Carousel'
 import TodoApp from '../components/TodoApp'
 import SideBar from '../components/SideBar'
+import ButtonToggles from '../components/ButtonToggles'
 import DarkModeToggle from '../components/DarkModeToggle'
 
 import { createTheme } from 'react-dark-theme'
@@ -46,7 +47,10 @@ class DashboardPage extends React.Component {
         }
     }
 
-    onChange = date => this.setState({ date })
+    onChange = date => {
+        this.setState({ date });
+    }
+    
 
     handleClick() {
         if (this.state.display === "hide") {
@@ -89,6 +93,7 @@ class DashboardPage extends React.Component {
 
 
     render() {
+        
         let myTheme = createTheme(darkTheme, lightTheme);
         return (
             <div className="show-fake-browser sidebar-page h-100">
@@ -137,11 +142,15 @@ class DashboardPage extends React.Component {
                                 </div>
 
                                 {/* Tasks Containers */}
+                                <ButtonToggles buttonNames={["Add new task", "Create a new list"]} buttonIcons={["plus", "list-ol"]}/>
+
+                                {/* Tasks Containers */}
                                 <Carousel />
                             </Col>
 
 
                             <Col sm={3}>
+                                {/* DarkModeToggle */}
                                 <DarkModeToggle lightTheme={lightTheme} darkTheme={darkTheme} />
                                 
                                 {/* Calendar */}
