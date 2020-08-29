@@ -4,7 +4,6 @@ import { Row, Col } from 'react-bootstrap';
 import { Header, Container } from 'rsuite';
 
 import Carousel from '../components/Carousel'
-import TodoApp from '../components/TodoApp'
 import SideBar from '../components/SideBar'
 import ButtonToggles from '../components/ButtonToggles'
 import DarkModeToggle from '../components/DarkModeToggle'
@@ -23,6 +22,7 @@ const lightTheme = {
     text: black,
     secondary: gray,
     third: black,
+    popcolor: black
 }
 
 const darkTheme = {
@@ -30,6 +30,7 @@ const darkTheme = {
     text: white,
     secondary: dark_black,
     third: dark_black,
+    popcolor: "#1ffb7e"
 }
 
 var todoItems = [];
@@ -93,7 +94,6 @@ class DashboardPage extends React.Component {
 
 
     render() {
-        
         let myTheme = createTheme(darkTheme, lightTheme);
         return (
             <div className="show-fake-browser sidebar-page h-100">
@@ -105,10 +105,10 @@ class DashboardPage extends React.Component {
                         </Header>
 
                         <Row>
-                            <Col sm={9}>
+                            <Col sm={9} className="p-10">
                                 {/* Speech Recognition to add tasks */}
-                                <div>
-                                    <div id="task-container">
+                                <Container fluid className="m-10">
+                                    <div id="task-container" className="align dark_theme theme_border">
                                         <div id="taskInfo">
                                             <label for="date" className="label">Date</label>
                                             <input type="text" name="date"></input>
@@ -139,13 +139,13 @@ class DashboardPage extends React.Component {
 
 
                                     </div>
-                                </div>
+                                </Container>
 
                                 {/* Tasks Containers */}
                                 <ButtonToggles buttonNames={["Add new task", "Create a new list"]} buttonIcons={["plus", "list-ol"]}/>
 
                                 {/* Tasks Containers */}
-                                <Carousel />
+                                <Carousel initItems={todoItems}/>
                             </Col>
 
 
@@ -158,11 +158,12 @@ class DashboardPage extends React.Component {
                                     <Calendar
                                         onChange={this.onChange}
                                         value={this.state.date}
+                                        className="dark_theme"
                                     />
                                 </div>
 
                                 {/* Priority tasks */}
-                                <TodoApp initItems={todoItems} />
+                                {/* <TodoApp initItems={todoItems} /> */}
                             </Col>
                         </Row>
                     </Container>
