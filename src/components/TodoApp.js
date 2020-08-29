@@ -1,12 +1,6 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
-// import { ReactDOM } from 'react-router-dom';
-
-var todoItems = [];
-todoItems.push({ index: 1, value: "learn react", done: false });
-todoItems.push({ index: 2, value: "Go shopping", done: true });
-todoItems.push({ index: 3, value: "buy flowers", done: true });
-
+import { Container, Row, Col } from 'react-bootstrap';
+import { ButtonToolbar, Icon, Button, Form } from 'rsuite';
 
 class TodoList extends React.Component {
     render() {
@@ -39,11 +33,14 @@ class TodoListItem extends React.Component {
         var todoClass = this.props.item.done ?
             "done" : "undone";
         return (
-            <li className="list-group-item ">
+            <li className="p-2 list-group-item dark_theme overflow-auto">
                 <div className={todoClass}>
-                    <span className="glyphicon glyphicon-ok icon" aria-hidden="true" onClick={this.onClickDone}></span>
+                    <Button appearance="subtle" aria-hidden="true" onClick={this.onClickDone}>
+                        <Icon className="dark_theme_pop_text" icon="check" />
+                    </Button>
+                    {/* <span className="glyphicon glyphicon-ok icon" aria-hidden="true" onClick={this.onClickDone}></span> */}
                     {this.props.item.value}
-                    <button type="button" className="close" onClick={this.onClickClose}>&times;</button>
+                    <button type="button" className="close dark_theme_pop_text" onClick={this.onClickClose}>&times;</button>
                 </div>
             </li>
         );
@@ -69,17 +66,27 @@ class TodoForm extends React.Component {
     }
     render() {
         return (
-            <form ref="form" onSubmit={this.onSubmit} className="form-inline">
-                <input type="text" ref="itemName" className="form-control" placeholder="add a new todo..." />
-                <button type="submit" className="btn btn-default">Add</button>
-            </form>
+            <Container>
+                <Row>
+                    <form ref="form" onSubmit={this.onSubmit} className="form-inline">
+                        <input type="text" ref="itemName" placeholder="add a new todo..." />
+                        <Button type="submit">Add</Button>
+                    </form>
+                </Row>
+
+            </Container>
+
         );
     }
 }
 
 class TodoHeader extends React.Component {
+    constructor(props) {
+        super(props);
+        this.title = props.title;
+    }
     render() {
-        return <h4>Upcoming task</h4>;
+        return <h4>{this.title}</h4>;
     }
 }
 
@@ -89,34 +96,36 @@ class TodoApp extends React.Component {
         this.addItem = this.addItem.bind(this);
         this.removeItem = this.removeItem.bind(this);
         this.markTodoDone = this.markTodoDone.bind(this);
+        this.todoItems = props.initItems;
         this.state = { todoItems: this.todoItems };
+        this.title = props.title;
     }
     addItem(todoItem) {
-        todoItems.unshift({
-            index: todoItems.length + 1,
+        this.todoItems.unshift({
+            index: this.todoItems.length + 1,
             value: todoItem.newItemValue,
             done: false
         });
-        this.setState({ todoItems: todoItems });
+        this.setState({ todoItems: this.todoItems });
     }
     removeItem(itemIndex) {
-        todoItems.splice(itemIndex, 1);
-        this.setState({ todoItems: todoItems });
+        this.todoItems.splice(itemIndex, 1);
+        this.setState({ todoItems: this.todoItems });
     }
     markTodoDone(itemIndex) {
-        var todo = todoItems[itemIndex];
-        todoItems.splice(itemIndex, 1);
+        var todo = this.todoItems[itemIndex];
+        this.todoItems.splice(itemIndex, 1);
         todo.done = !todo.done;
-        todo.done ? todoItems.push(todo) : todoItems.unshift(todo);
-        this.setState({ todoItems: todoItems });
+        todo.done ? this.todoItems.push(todo) : this.todoItems.unshift(todo);
+        this.setState({ todoItems: this.todoItems });
     }
     render() {
         return (
-            <Container>
-                <TodoHeader />
-                <TodoList items={this.props.initItems} removeItem={this.removeItem} markTodoDone={this.markTodoDone} />
-                <TodoForm addItem={this.addItem} />
-            </Container>
+            <Col>
+                <TodoHeader title={this.title}/>
+                <TodoList items={this.todoItems} removeItem={this.removeItem} markTodoDone={this.markTodoDone} />
+                {/* <TodoForm addItem={this.addItem} /> */}
+            </Col>
         );
     }
 }

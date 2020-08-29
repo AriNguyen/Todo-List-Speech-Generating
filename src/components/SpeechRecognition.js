@@ -91,47 +91,16 @@ class Speech extends Component {
   render() {
     return (
       <div>
-        <label for="textbox" className="label">Voice content</label>
-        <div id="transcript">{this.state.text} 
-        </div>
-        <button class="button submit" onClick={this.toggleListen} >Voice Recognition</button>
+            <label for="textbox" className="label">Voice content</label>
+                <div id="transcript">
+                    {this.state.text} 
+                </div>
+            <button class="button submit" onClick={this.toggleListen} >Voice Recognition</button>
       </div>
     )
   }
 }
 
-//-------------------------CSS------------------------------------
 
-// const styles = {
-//     container: {
-//       display: 'flex',
-//       flexDirection: 'column',
-//       alignItems: 'center',
-//       textAlign: 'center'
-//     },
-//     button: {
-//       width: '60px',
-//       height: '60px',
-//       background: 'lightblue',
-//       borderRadius: '50%',
-//       margin: '6em 0 2em 0'
-//     },
-//     interim: {
-//       color: 'gray',
-//       border: '#ccc 1px solid',
-//       padding: '1em',
-//       margin: '1em',
-//       width: '300px'
-//     },
-//     final: {
-//       color: 'black',
-//       border: '#ccc 1px solid',
-//       padding: '1em',
-//       margin: '1em',
-//       width: '300px'
-//     }
-//   }
-  
-//   const { container, button, interim, final } = styles
 
 export default Speech
