@@ -192,6 +192,7 @@ ul>li:hover {
   border: 0px solid var(--third) !important;
 }
 
+
 .dark_theme_hover:hover {
   background-color: var(--popcolor) !important;
   color: var(--text) !important;
@@ -201,8 +202,6 @@ ul>li:hover {
 .dark_theme_pop {  
   background-color: var(--popcolor) !important;
 }
-
-
 
 
 .dark_theme_pop_text {  
