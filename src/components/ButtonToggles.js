@@ -1,26 +1,22 @@
 import React from 'react';
 import { ButtonToolbar, Icon, Button } from 'rsuite';
-import { Container } from 'react-bootstrap';
 
 function ButtonToggles(props) {
     const buttonNames = props.buttonNames;
     const buttonIcons = props.buttonIcons;
 
     const ButtonsGroup = buttonNames.map((e, i) =>
-        <Button color="black" appearance="ghost">
+        <Button className="dark_theme_pop_text">
             <Icon icon={buttonIcons[i]} /> {buttonNames[i]}
         </Button>
     );
 
-
     return (
-        <Container className="p-10">
-            <div>
-                <ButtonToolbar>
-                    {ButtonsGroup}
-                </ButtonToolbar>
-            </div>
-        </Container>
+        <div className="align">
+            <ButtonToolbar>
+                {ButtonsGroup}
+            </ButtonToolbar>
+        </div>
     );
 }
 
