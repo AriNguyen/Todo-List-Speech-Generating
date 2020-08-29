@@ -97,9 +97,6 @@ class LoginPage extends React.Component {
 
     return (
       <div className="form">
-        <button className="button" onClick={ () => this.handleClick() }>
-              Sign up
-        </button>
         <form name="authinfo" className="container" onSubmit={this.handleLogin}>
           <div className="auth">
             <label htmlFor="username">Username</label>
@@ -124,6 +121,9 @@ class LoginPage extends React.Component {
             <button id="login" type="submit" className="button">
               Log in
             </button>
+            <button className="button" onClick={ () => this.handleClick() }>
+              Sign up
+        </button>
           </div>
         </form>
 

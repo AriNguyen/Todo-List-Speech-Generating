@@ -111,7 +111,7 @@ class DashboardPage extends React.Component {
                                     <div id="task-container">
                                         <div id="taskInfo">
                                             <label for="date" className="label">Date</label>
-                                            <input type="text" name="date"></input>
+                                            <input type="text" name="date" placeholder="MM/DD/YYYY"></input>
                                             <label for="priority" className="label">Priority</label>
                                             <select name="priority">
                                                 <option value="1">1</option>
@@ -142,7 +142,7 @@ class DashboardPage extends React.Component {
                                 </div>
 
                                 {/* Tasks Containers */}
-                                <ButtonToggles buttonNames={["Add new task", "Create a new list"]} buttonIcons={["plus", "list-ol"]}/>
+                                <ButtonToggles buttonNames={["Add new task", "Create a new list", "filter"]} buttonIcons={["plus", "list-ol", "filter"]}/>
 
                                 {/* Tasks Containers */}
                                 <Carousel />

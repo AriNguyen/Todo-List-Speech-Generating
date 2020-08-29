@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,11 +35,23 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
+.auth{
+  position: relative;
+  left: 50%;
 
+}
+.form{
+  position: relative;
+  top: 10%
+}
 form[name="authinfo"]{
-overflow: hidden;
-margin: auto;
+  position: relative;
+  /* margin: auto; */
+  right: 5%;
+  display: block;
+  box-sizing: border-box;
+  
 }
 
 /* -------Authentication area----------- */
@@ -50,11 +62,12 @@ margin: auto;
   display: block;
   box-sizing: border-box;
 }
-.auth{
+form[name="register"]{
+  /* margin: auto; */
   position: relative;
-  box-sizing: border-box;
-  left: 40%;
-  margin:auto;
+  margin-top: 2%;
+  right: 5%;
+  display: block
 }
 
 #login,.button {
