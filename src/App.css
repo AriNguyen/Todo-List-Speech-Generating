@@ -220,6 +220,32 @@ ul>li:hover {
 }
 
 .align {
-  margin-top: 20px;
-  margin-left: 50px;
+  margin-top: 20px !important;
+  margin-left: 50px !important;
 }
+
+.placeholder {
+  background: transparent;
+}
+
+.placeholder:before {
+  background: var(--popcolor);
+}
+
+.li_todo {
+  padding: 10px 15px;
+  background: transparent;
+}
+
+.li_todo:hover {
+  background: darken(#eee, 5%) !important;
+}
+
+
+.ul_todo {
+  list-style: none;
+  margin:0;
+  padding:0;
+}
+
+
