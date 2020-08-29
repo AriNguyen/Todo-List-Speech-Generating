@@ -2,10 +2,11 @@ import React from 'react';
 import Calendar from 'react-calendar';
 import { Row, Col } from 'react-bootstrap';
 import { Header, Container } from 'rsuite';
-
+import Speech from '../components/SpeechRecognition'
 import Carousel from '../components/Carousel'
 import SideBar from '../components/SideBar'
 import DarkModeToggle from '../components/DarkModeToggle'
+import "../App.css";
 import ButtonToggles from '../components/ButtonToggles'
 
 import { createTheme } from 'react-dark-theme'
@@ -67,6 +68,9 @@ class DashboardPage extends React.Component {
         this.setState({ [e.currentTarget.name]: e.target.value })
     }
 
+
+  // send username and new task info to /add in server
+  // handleNewTask = e => {
   // handle toglge option to display/hide the speech-to-text feature
   handleVoice() {
     if (this.state.display === "hide") {
@@ -155,43 +159,33 @@ render() {
                             {/* Speech Recognition to add tasks */}
                             <Container fluid className="m-10">
                                 <div id="task-container" className="align dark_theme theme_border">
-                                    <div id="taskInfo">
-                                        <label for="date" className="label">Due date</label>
-                                        <input
-                                            type="text"
-                                            name="date"
-                                            value={this.state.date}
-                                            onChange={this.handleChange}></input>
-                                        <label for="priority" className="label">Priority (from most to least important)</label>
-                                        <select name="priority" value={this.state.priority} onChange={this.handleChange}>
-                                            <option value=''>---Select---</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                        </select>
-                                        <label for="task" class="label">Task</label>
-                                        <textarea
-                                            name="task"
-                                            class="task content"
-                                            rows="4" cols="50"
-                                            value={this.state.task}
-                                            onChange={this.handleChange}></textarea>
-                                    </div>
-
-                                    <div className={`voice-container ${this.state.display}`}>
-                                        <div>
-                                            <label for="textbox" className="label">Voice content</label>
-                                            <textarea id="voice content" rows="4" cols="50"></textarea>
-                                        </div>
-                                        <button class="button start" type="submit" onClick={this.speechRecognition}>Start</button>
-                                        <button class="button stop" type="submit" >Stop</button>
-                                        <button class="button load" type="submit">Load</button>
-                                    </div>
-
-                                    <button class="button voice" type="submit" onClick={() => this.handleVoice()}>Voice Recognition</button>
-                                    <button class="button submit" type="submit" onClick={this.handleNewTask}>Submit</button>
-                                </div>
+                                  <div id="taskInfo">
+                                  <label for="date" className="label">Due date</label>
+                                  <input
+                                    type="text"
+                                    name="date"
+                                    value={this.state.date}
+                                    onChange={this.handleChange}></input>
+                                  <label for="priority" className="label">Priority (from most to least important)</label>
+                                  <select name="priority" value={this.state.priority} onChange={this.handleChange}>
+                                    <option value=''>---Select---</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                  </select>
+                                  <label for="task" class="label">Task</label>
+                                  <textarea
+                                    name="task"
+                                    class="task content"
+                                    rows="4" cols="50"
+                                    value={this.state.task}
+                                    onChange={this.handleChange}></textarea>
+                              </div>
+                      <Speech/>
+                      <button class="button submit" type="submit" onClick={this.handleNewTask} >Submit</button>
+                      </div>
+                                   
                             </Container>
 
                             {/* Tasks Containers */}

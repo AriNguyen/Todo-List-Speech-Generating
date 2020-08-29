@@ -6,10 +6,6 @@ const app = express();
 const port = 4000;
 const hostname = "localhost";
 
-// number of rounds the bcrypt algorithm will use to generate the salt
-// the more rounds, the longer it takes
-// so the salt will be more secure
-// https://github.com/kelektiv/node.bcrypt.js#a-note-on-rounds
 const saltRounds = 10;
 
 const env = require("../env.json");
@@ -29,13 +25,13 @@ app.get("/", function (req, res) {
 app.post("/user", function (req, res) {
 
   let username = req.body.username;
-  let plaintextPassword = req.body.plaintextPassword;
+  let password = req.body.plaintextPassword;
 
-  if( username == undefined || plaintextPassword == undefined ){
+  if( username == undefined || password == undefined ){
     // TODO check body has username and plaintextPassword keys
     res.status(401);
     res.send();
-  }else if( !(typeof username === 'string') || !(typeof plaintextPassword === 'string') ){
+  }else if( !(typeof username === 'string') || !(typeof password === 'string') ){
     // check if username and password are strings
     res.status(401);
     res.send();
@@ -43,7 +39,7 @@ app.post("/user", function (req, res) {
     // TODO check username length >= 1 and <= 20
     res.status(401);
     res.send();
-  }else if( plaintextPassword.length < 5 || plaintextPassword > 36 ){
+  }else if( password.length < 5 || password > 36 ){
     // TODO check password length >= 5 and <= 36
     res.status(401);
     res.send();
@@ -59,7 +55,7 @@ app.post("/user", function (req, res) {
   });
 
   bcrypt
-    .hash(plaintextPassword, saltRounds)
+    .hash(password, saltRounds)
     .then(function (hashedPassword) {
       pool.query(
         "INSERT INTO users (username, hashed_password) VALUES ($1, $2)",
@@ -82,7 +78,7 @@ app.post("/user", function (req, res) {
 
 app.post("/auth", function (req, res) {
     let username = req.body.username;
-    let plaintextPassword = req.body.plaintextPassword;
+    let password = req.body.plaintextPassword;
     pool.query("SELECT hashed_password FROM users WHERE username = $1", [
         username,
     ])
@@ -93,7 +89,7 @@ app.post("/auth", function (req, res) {
       }
       let hashedPassword = response.rows[0].hashed_password;
       bcrypt
-      .compare(plaintextPassword, hashedPassword)
+      .compare(password, hashedPassword)
       .then(function (isSame) {
           if (isSame) {
             // password matched
