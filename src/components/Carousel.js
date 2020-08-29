@@ -8,16 +8,16 @@ class Carousel extends React.Component {
         super(props);
         this.state = {
             items: [
-                {   
+                {
                     id: 0,
-                    title: '',
+                    title: 'Today',
                     subTitle: '',
                     link: '',
                     selected: false
                 },
                 {
                     id: 1,
-                    title: '',
+                    title: 'Yesterday',
                     subTitle: '',
                     link: '',
                     selected: false
@@ -45,13 +45,13 @@ class Carousel extends React.Component {
 
     makeItems = (items) => {
         return items.map(item => {
-            return <Card item={item} click={(e => this.handleCardClick(item.id, e))} key={item.id}/>
+            return <Card item={item} click={(e => this.handleCardClick(item.id, e))} key={item.id} initItems={this.props.initItems} title={item.title}/>
         })
     }
 
     render() {
-        return(
-            <Container fluid={true}>
+        return (
+            <Container fluid={true} className="align">
                 <Row className="justify-content-around">
                     {this.makeItems(this.state.items)}
                 </Row>
