@@ -45,7 +45,7 @@ class SideBar extends React.Component {
                 collapsible
             >
                 <Sidenav.Header>
-                    <div style={headerStyles}>
+                    <div style={headerStyles} className="dark_theme_pop_text">
                         <Icon icon="avatar" size="lg" style={{ verticalAlign: 0 }} />
                         <span style={{ marginLeft: 12 }}> NAME</span>
                     </div>
@@ -56,6 +56,7 @@ class SideBar extends React.Component {
                     defaultOpenKeys={['3']}
                     appearance="subtle"
                     style={new_style}
+                    className="full_length"
                 >
                     <Sidenav.Body>
                         <Nav>
