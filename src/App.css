@@ -54,6 +54,7 @@ form[name="authinfo"]{
   
 }
 
+
 /* -------Authentication area----------- */
 
 #user,#password, #newUser, #newPassword, #cPassword{
@@ -108,9 +109,13 @@ form[name="register"]{
 
 }
 
-.voice-container{
-  display: inline;
+#transcript{
+  width: 340px;
+  height: 100px;
+  border: solid black;
+  border-width: 1px
 }
+
 /* Add a hover effect for buttons */
 #login:hover {
   opacity: 0.8;
@@ -133,3 +138,11 @@ form[name="register"]{
   margin: 10px;
   padding: 10px;
 }
+
+
+/* ------------ All-task list decor ------------- */
+h2{
+  text-align: center;
+}
+
+

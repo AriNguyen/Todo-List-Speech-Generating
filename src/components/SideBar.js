@@ -34,10 +34,15 @@ class SideBar extends React.Component {
             activeKey: eventKey
         });
     }
+    handleSignOut = e => {
+      e.preventDefault();
+      window.localStorage.removeItem("token");
+      window.location.href = `/`;
+    }
     render() {
         const { expanded } = this.state;
         let new_style = {backgroundColor: this.state.backgroundColor, color: this.state.color};
-        console.log(new_style);
+        
         return (
             <Sidebar
                 style={{ display: 'flex', flexDirection: 'column' }}
@@ -72,7 +77,7 @@ class SideBar extends React.Component {
                             <Dropdown placement="rightStart" eventKey="4" title="Settings" icon={<Icon icon="gear-circle" />}>
                                 <Dropdown.Item eventKey="4-1">Account</Dropdown.Item>
                                 <Dropdown.Item eventKey="4-2">Customization</Dropdown.Item>
-                                <Dropdown.Item eventKey="4-3">Sign Out</Dropdown.Item>
+                                <Dropdown.Item eventKey="4-3" onClick={this.handleSignOut}>Sign Out</Dropdown.Item>
                             </Dropdown>
                         </Nav>
                     </Sidenav.Body>
