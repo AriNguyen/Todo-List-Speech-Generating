@@ -26,30 +26,4 @@ code {
     monospace;
 }
 
-.a-card {
-  background-color: var(--secondary);
-  border-radius: 10px;
-  width: 300px;
-  height: 200px;
-  border: 2px solid var(--third);
-}
 
-
-.a-card-info {
-  font-size: 24px;
-  margin: 0px;
-}
-
-.a-card-title {
-  margin-top: 10px;
-  min-height: 100px;
-}
-
-.a-card-sub-title {
-  font-size: 16px;
-  margin: 0px;
-}
-
-Sidenav {
-  background-color: var(--secondary);
-}
