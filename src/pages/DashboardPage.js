@@ -183,7 +183,7 @@ class DashboardPage extends React.Component {
                                                 onChange={this.handleChange}></textarea>
                                         </div>
                                         <Speech />
-                                        <button class="button submit" type="submit" onClick={this.handleNewTask} >Submit</button>
+                                        <button class="button submit dark_theme_pop" type="submit" onClick={this.handleNewTask} >Submit</button>
                                     </div>
 
                                 </Container>

@@ -138,7 +138,7 @@ class TodoForm extends React.Component {
                 <Row>
                     <form ref="form" onSubmit={this.onSubmit} className="form-inline">
                         <input type="text" ref="itemName" placeholder="add a new todo..." />
-                        <Button type="submit">Add</Button>
+                        <Button className="dark_theme_pop" type="submit">Add</Button>
                     </form>
                 </Row>
 
