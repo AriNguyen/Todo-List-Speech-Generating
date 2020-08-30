@@ -109,9 +109,7 @@ form[name="register"]{
 #transcript{
   width: 340px;
   height: 100px;
-  border: solid black;
-  border-width: 1px;
-  background-color: white
+  background-color: var(--background)
 }
 
 /* Add a hover effect for buttons */
@@ -167,19 +165,17 @@ ul>li:hover {
   margin-left: 80px;
 }
 
+/* List Items strike through */
 .done {
-  /* color: red; */
   text-decoration: line-through;
 }
 
 .undone {
-  /* color: #61DAFB; */
 }
 
 .icon {
   margin: 6px 10px 6px 0;
 }
-
 
 .a-card {
   background-color: var(--secondary);
@@ -267,4 +263,9 @@ ul>li:hover {
   padding:0;
 }
 
+input, textarea, select {
+  background-color: var(--background) !important;
+  color: var(--text) !important;
+  border: 0px solid var(--third) !important;
+}
 

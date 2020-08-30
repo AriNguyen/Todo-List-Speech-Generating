@@ -95,7 +95,7 @@ class Speech extends Component {
                 <div id="transcript">
                     {this.state.text} 
                 </div>
-            <button class="button submit dark_theme_pop_text" onClick={this.toggleListen} >Voice Recognition</button>
+            <button class="button submit dark_theme_pop" onClick={this.toggleListen} >Voice Recognition</button>
       </div>
     )
   }
