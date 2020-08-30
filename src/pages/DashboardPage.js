@@ -2,14 +2,13 @@ import React from 'react';
 import Calendar from 'react-calendar';
 import { Row, Col } from 'react-bootstrap';
 import { Header, Container } from 'rsuite';
+import { createTheme } from 'react-dark-theme'
+
 import Speech from '../components/SpeechRecognition'
 import Carousel from '../components/Carousel'
 import SideBar from '../components/SideBar'
 import DarkModeToggle from '../components/DarkModeToggle'
-import "../App.css";
 import ButtonToggles from '../components/ButtonToggles'
-
-import { createTheme } from 'react-dark-theme'
 
 const white = "#FFFFFF";
 const black = "#272b34";
