@@ -108,7 +108,6 @@ form[name="register"]{
 
 #transcript{
   width: 340px;
-  height: 100px;
   background-color: var(--background)
 }
 
@@ -207,6 +206,12 @@ ul>li:hover {
   border: 0px solid var(--third) !important;
 }
 
+.dark_theme_pop_text_2 {
+  background-color: var(--background) !important;
+  color: var(--popcolor) !important;
+  border: 1px solid var(--popcolor) !important;
+}
+
 
 .dark_theme_hover:hover {
   background-color: var(--popcolor) !important;
@@ -237,6 +242,7 @@ ul>li:hover {
 .align {
   margin-top: 20px !important;
   margin-left: 50px !important;
+  padding: 10px;
 }
 
 .placeholder {
@@ -266,10 +272,30 @@ ul>li:hover {
 input, textarea, select {
   background-color: var(--background) !important;
   color: var(--text) !important;
-  border: 0px solid var(--third) !important;
+  /* border: 0px solid var(--third) !important; */
 }
 
 input:focus, textarea:focus, select:focus, button:focus {
   outline: none !important;
 }
 
+.react-calendar__month-view__days__day--weekend {
+  color: var(--popcolor) !important ;
+}
+
+.no_border {
+  border: 0px !important;
+}
+
+.pb-10 {
+  padding-bottom: 10px;
+}
+
+.fit {
+  /* display: inline-block !important; */
+  width: fit-content !important; 
+}
+
+.container {
+  border-radius: 10px;
+}

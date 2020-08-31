@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
+import { Input, Button, Icon, InputGroup, Container } from 'rsuite';
+
 import "../App.css";
+import { text } from 'body-parser';
 
 //-----------------SPEECH RECOGNITION SETUP---------------------
 
@@ -23,13 +26,13 @@ class Speech extends Component {
     this.toggleListen = this.toggleListen.bind(this)
     this.handleListen = this.handleListen.bind(this)
   }
-  
+
   toggleListen() {
     this.setState({
       listening: !this.state.listening
     }, this.handleListen)
   }
-  
+
   handleListen() {
 
     console.log('listening?', this.state.listening)
@@ -61,27 +64,29 @@ class Speech extends Component {
         if (event.results[i].isFinal) finalTranscript += transcript + ' ';
         else interimTranscript += transcript;
       }
-      this.setState({text: finalTranscript});
+      this.setState({ text: finalTranscript });
       console.log(this.state.text)
+      let textarea = document.getElementById("transcript");
+      textarea.value = this.state.text;
 
-    //-------------------------COMMANDS------------------------------------
+      //-------------------------COMMANDS------------------------------------
 
       const transcriptArr = finalTranscript.split(' ')
       const stopCmd = transcriptArr.slice(-3, -1)
       console.log('stopCmd', stopCmd)
 
-      if (stopCmd[0] === 'stop' && stopCmd[1] === 'listening'){
+      if (stopCmd[0] === 'stop' && stopCmd[1] === 'listening') {
         recognition.stop()
         recognition.onend = () => {
           console.log('Stopped listening per command')
           const finalText = transcriptArr.slice(0, -3).join(' ')
-          this.setState({text: finalText});
+          this.setState({ text: finalText });
         }
       }
     }
-    
-  //-----------------------------------------------------------------------
-    
+
+    //-----------------------------------------------------------------------
+
     recognition.onerror = event => {
       console.log("Error occurred in recognition: " + event.error)
     }
@@ -90,13 +95,14 @@ class Speech extends Component {
 
   render() {
     return (
-      <div>
-            <label for="textbox" className="label">Voice content</label>
-                <div id="transcript">
-                    {this.state.text} 
-                </div>
-            <button class="button submit dark_theme_pop" onClick={this.toggleListen} >Voice Recognition</button>
-      </div>
+      <Container className="p-10">
+          <InputGroup className="no_border" style={{ width: 380, height: 75 }}>
+            <InputGroup.Addon>
+              <Icon onClick={this.toggleListen} icon="microphone" />
+            </InputGroup.Addon>
+            <Input id="transcript"/> 
+          </InputGroup>
+      </Container>
     )
   }
 }

@@ -1,14 +1,13 @@
 import React from 'react';
 import Calendar from 'react-calendar';
 import { Row, Col } from 'react-bootstrap';
-import { Header, Container } from 'rsuite';
+import { Header, Container, Icon, Button, Input, InputGroup, InputPicker, Divider } from 'rsuite';
 import { createTheme } from 'react-dark-theme'
 
 import Speech from '../components/SpeechRecognition'
 import Carousel from '../components/Carousel'
 import SideBar from '../components/SideBar'
 import DarkModeToggle from '../components/DarkModeToggle'
-import ButtonToggles from '../components/ButtonToggles'
 
 const white = "#FFFFFF";
 const black = "#272b34";
@@ -149,46 +148,44 @@ class DashboardPage extends React.Component {
                 <Container className="h-100" style={{ backgroundColor: myTheme.background, color: myTheme.text }}>
                     <SideBar backgroundColor={myTheme.secondary} color={myTheme.text} />
                     <Container>
-                        <Header>
-                            {/* <h2>Page Title</h2> */}
-                        </Header>
-
                         <Row>
-                            <Col sm={9} className="p-10">
+                            <Col sm={9} className="m-10">
+                                {/* User Greeting */}
+                                <Header className="align theme_border">
+                                    <h2 style={{ color: myTheme.popcolor }}>Hello @User</h2>
+                                    <p>Let's get started with your day</p>
+                                    <p style={{ fontSize: "16pt" }}>You have <span style={{ color: "yellow", fontSize: "18pt", fontWeight: "bold" }}>4</span> tasks coming up today and <span style={{ color: "red", fontSize: "18pt", fontWeight: "bold" }}>2</span> pending task for yesterday</p>
+                                </Header>
+
                                 {/* Speech Recognition to add tasks */}
-                                <Container fluid className="m-10">
-                                    <div id="task-container" className="align dark_theme theme_border">
-                                        <div id="taskInfo">
-                                            <label for="date" className="label">Due date</label>
-                                            <input
-                                                type="text"
-                                                name="date"
-                                                value={this.state.date}
-                                                onChange={this.handleChange}></input>
-                                            <label for="priority" className="label">Priority (from most to least important)</label>
-                                            <select name="priority" value={this.state.priority} onChange={this.handleChange}>
-                                                <option value=''>---Select---</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                            </select>
-                                            <label for="task" class="label">Task</label>
-                                            <textarea
-                                                name="task"
-                                                class="task content"
-                                                rows="4" cols="50"
-                                                value={this.state.task}
-                                                onChange={this.handleChange}></textarea>
-                                        </div>
-                                        <Speech />
-                                        <button class="button submit dark_theme_pop" type="submit" onClick={this.handleNewTask} >Submit</button>
+                                <Container fluid className="m-10 ">
+                                    <div id="task-container" className="align dark_theme">
+                                        <Row id="taskInfo" className="pb-10">
+                                            <Col sm={7}>
+                                                {/* Speech Recognition */}
+                                                <Speech />
+                                            </Col>
+
+                                            <Col sm={4}>
+                                                <InputGroup className="pb-10 no_border fit">
+                                                    <InputGroup.Addon>
+                                                        <Icon icon="calendar" />
+                                                    </InputGroup.Addon>
+                                                    <Input className="" name="date" placeholder="Due date" value={this.state.date} onChange={this.handleChange} />
+                                                </InputGroup>
+
+                                                {/* Due date */}
+                                                <InputPicker className="no_border fit" placeholder="Priotity" />
+                                            </Col>
+                                        </Row>
+
+                                        {/* Submit */}
+                                        <Button className="dark_theme_pop" type="submit" onClick={this.handleNewTask}>
+                                            <Icon icon="plus" /> Add task
+                                        </Button>
                                     </div>
 
                                 </Container>
-
-                                {/* Tasks Containers */}
-                                <ButtonToggles buttonNames={["Add new task", "Create a new list"]} buttonIcons={["plus", "list-ol"]} />
 
                                 {/* Tasks Containers */}
                                 <Carousel initItems={todoItems} />
