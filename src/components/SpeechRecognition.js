@@ -88,6 +88,10 @@ class Speech extends Component {
 
   }
 
+  childFunction(){
+    this.props.functionCallFromParent("Hello From SpeechRecognition");
+}
+
   render() {
     return (
       <div>
@@ -96,6 +100,7 @@ class Speech extends Component {
                     {this.state.text} 
                 </div>
             <button class="button submit dark_theme_pop" onClick={this.toggleListen} >Voice Recognition</button>
+            <button onClick={this.childFunction.bind(this)}>Load</button>
       </div>
     )
   }

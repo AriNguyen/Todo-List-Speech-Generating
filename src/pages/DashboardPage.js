@@ -179,7 +179,7 @@ class DashboardPage extends React.Component {
                                                 class="task content"
                                                 rows="4" cols="50"
                                                 value={this.state.task}
-                                                onChange={this.handleChange}></textarea>
+                                                onChange={this.handleChange}>{this.props.valueFromParent}</textarea>
                                         </div>
                                         <Speech />
                                         <button class="button submit dark_theme_pop" type="submit" onClick={this.handleNewTask} >Submit</button>
