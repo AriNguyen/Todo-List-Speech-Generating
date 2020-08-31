@@ -93,6 +93,10 @@ class Speech extends Component {
 
   }
 
+  childFunction(){
+    this.props.functionCallFromParent("Hello From SpeechRecognition");
+}
+
   render() {
     return (
       <Container className="p-10">
