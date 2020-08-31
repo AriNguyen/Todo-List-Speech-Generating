@@ -43,6 +43,7 @@ class DashboardPage extends React.Component {
             priority: '',
             task: '',
             display: "hide",
+            todoItems: [],
         }
     }
 
@@ -52,10 +53,34 @@ class DashboardPage extends React.Component {
 
     handleLoad = e => {
         // e.preventDefault();
-        this.setState({ 'user': window.location.search.split('=')[1] })
+      this.setState({ 'user': window.location.search.split('=')[1] })
 
-        // get user data from database and append to the DOM
-
+      // get user data from database and append to the DOM
+      fetch('/get', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-auth': window.localStorage.getItem("token")
+        },
+        body: JSON.stringify({
+          'user': this.state.user
+        })
+      })
+      .then( res => {
+        return res.json();
+      })
+      .then( data => {
+      // append user data to array displayData
+        let curTop = 0;
+        let tempList = [];
+        console.log(data)
+      for( let i = 0; i < data.list.length; i++ ){
+        tempList.push(data.list[i].task);
+      }
+      this.setState({todoItems: tempList})
+      console.log(this.state.todoItems)
+      })
+      .catch(err => {console.error(err)})
     }
 
     // handle click on the calendar to set date
@@ -151,7 +176,7 @@ class DashboardPage extends React.Component {
                             <Col sm={9} className="m-10">
                                 {/* User Greeting */}
                                 <Header className="align theme_border">
-                                    <h2 style={{ color: myTheme.popcolor }}>Hello @User</h2>
+                                    <h2 style={{ color: myTheme.popcolor }}>Hello {this.state.user}</h2>
                                     <p>Let's get started with your day</p>
                                     <p style={{ fontSize: "16pt" }}>You have <span style={{ color: "yellow", fontSize: "18pt", fontWeight: "bold" }}>4</span> tasks coming up today and <span style={{ color: "red", fontSize: "18pt", fontWeight: "bold" }}>2</span> pending task for yesterday</p>
                                 </Header>
@@ -187,7 +212,7 @@ class DashboardPage extends React.Component {
                                 </Container>
 
                                 {/* Tasks Containers */}
-                                <Carousel initItems={todoItems} />
+                                <Carousel initItems={this.state.todoItems} />
                             </Col>
 
 
