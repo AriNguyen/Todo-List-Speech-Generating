@@ -39,13 +39,6 @@ app.get("/status", function (req, res) {
    try {
       var decoded = jwt.decode(token, secret);
       console.log(decoded);
-   //    pool.query("SELECT username FROM users WHERE username = $1", [username])
-   //    .then( function (response) {
-   //      if( response.rows.length === 0 ){
-   //      }else{
-   //        res.status(200).json({username: })
-   //      }
-   //    });
    }
    catch (ex) {
     res.status(401).json({ error: "Invalid JWT" });
@@ -158,6 +151,19 @@ app.post("/add", function (req, res) {
   res.status(200).send();
 })
 
+app.post("/get", function (req, res) {
+  let user = req.body.user;
+  let list;
+
+  pool.query(`SELECT * FROM ${user};`)
+  .then( response => {
+    list = response.rows;
+    console.log(list);
+    res.status(200);
+    res.json({list});
+  })
+  .catch( err => {console.error(err)} );
+})
 
 app.listen(port, hostname, () => {
     console.log(`Listening at: http://${hostname}:${port}`);
