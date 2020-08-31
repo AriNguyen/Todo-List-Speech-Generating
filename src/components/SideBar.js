@@ -1,5 +1,7 @@
 import React from 'react';
-import { Sidenav, Sidebar, Icon, Dropdown, Nav } from 'rsuite';
+import { Sidenav, Sidebar, Icon, Dropdown, Nav, Container } from 'rsuite';
+
+import DarkModeToggle from '../components/DarkModeToggle'
 
 const headerStyles = {
     padding: 18,
@@ -21,6 +23,8 @@ class SideBar extends React.Component {
             backgroundColor: props.backgroundColor,
             color: props.color
         };
+        this.lightTheme = props.lightTheme;
+        this.darkTheme = props.darkTheme;
         this.handleToggle = this.handleToggle.bind(this);
         this.handleSelect = this.handleSelect.bind(this);
     }
@@ -35,20 +39,22 @@ class SideBar extends React.Component {
         });
     }
     handleSignOut = e => {
-      e.preventDefault();
-      window.localStorage.removeItem("token");
-      window.location.href = `/`;
+        e.preventDefault();
+        window.localStorage.removeItem("token");
+        window.location.href = `/`;
     }
     render() {
         const { expanded } = this.state;
-        let new_style = {backgroundColor: this.state.backgroundColor, color: this.state.color};
-        
+        let new_style = { backgroundColor: this.state.backgroundColor, color: this.state.color };
+
         return (
             <Sidebar
                 style={{ display: 'flex', flexDirection: 'column' }}
                 width={expanded ? 260 : 56}
                 collapsible
             >
+
+
                 <Sidenav.Header>
                     <div style={headerStyles} className="dark_theme_pop_text">
                         <Icon icon="avatar" size="lg" style={{ verticalAlign: 0 }} />
@@ -82,7 +88,11 @@ class SideBar extends React.Component {
                             </Dropdown>
                         </Nav>
                     </Sidenav.Body>
+
                 </Sidenav>
+                
+                {/* DarkModeToggle */}
+                <DarkModeToggle lightTheme={this.lightTheme} darkTheme={this.darkTheme} />
             </Sidebar>
         );
     }

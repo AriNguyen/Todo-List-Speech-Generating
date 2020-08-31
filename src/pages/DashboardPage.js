@@ -7,7 +7,6 @@ import { createTheme } from 'react-dark-theme'
 import Speech from '../components/SpeechRecognition'
 import Carousel from '../components/Carousel'
 import SideBar from '../components/SideBar'
-import DarkModeToggle from '../components/DarkModeToggle'
 
 const white = "#FFFFFF";
 const black = "#272b34";
@@ -146,7 +145,7 @@ class DashboardPage extends React.Component {
         return (
             <div className="show-fake-browser sidebar-page h-100">
                 <Container className="h-100" style={{ backgroundColor: myTheme.background, color: myTheme.text }}>
-                    <SideBar backgroundColor={myTheme.secondary} color={myTheme.text} />
+                    <SideBar backgroundColor={myTheme.secondary} color={myTheme.text} lightTheme={lightTheme} darkTheme={darkTheme}/>
                     <Container>
                         <Row>
                             <Col sm={9} className="m-10">
@@ -158,24 +157,24 @@ class DashboardPage extends React.Component {
                                 </Header>
 
                                 {/* Speech Recognition to add tasks */}
-                                <Container fluid className="m-10 ">
-                                    <div id="task-container" className="align dark_theme">
+                                <Container fluid className="m-10">
+                                    <div id="task-container" className="align dark_theme border-10">
                                         <Row id="taskInfo" className="pb-10">
-                                            <Col sm={7}>
+                                            <Col sm={8}>
                                                 {/* Speech Recognition */}
                                                 <Speech />
                                             </Col>
 
-                                            <Col sm={4}>
-                                                <InputGroup className="pb-10 no_border fit">
+                                            <Col>
+                                                <InputGroup className="pb-10 no_border">
                                                     <InputGroup.Addon>
-                                                        <Icon icon="calendar" />
+                                                        <Icon icon="calendar"/>
                                                     </InputGroup.Addon>
                                                     <Input className="" name="date" placeholder="Due date" value={this.state.date} onChange={this.handleChange} />
                                                 </InputGroup>
 
                                                 {/* Due date */}
-                                                <InputPicker className="no_border fit" placeholder="Priotity" />
+                                                <InputPicker className="no_border" placeholder="Priotity" block/>
                                             </Col>
                                         </Row>
 
@@ -193,8 +192,7 @@ class DashboardPage extends React.Component {
 
 
                             <Col sm={3}>
-                                {/* DarkModeToggle */}
-                                <DarkModeToggle lightTheme={lightTheme} darkTheme={darkTheme} />
+                                
 
                                 {/* Calendar */}
                                 <div id="calendar" className="p-0">
