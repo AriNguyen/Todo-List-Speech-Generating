@@ -1,7 +1,6 @@
 import React from 'react';
-import { Sidenav, Sidebar, Icon, Dropdown, Nav, Container } from 'rsuite';
+import { Sidenav, Sidebar, Icon, Dropdown, Nav } from 'rsuite';
 
-import DarkModeToggle from '../components/DarkModeToggle'
 
 const headerStyles = {
     padding: 18,
@@ -50,15 +49,12 @@ class SideBar extends React.Component {
         return (
             <Sidebar
                 style={{ display: 'flex', flexDirection: 'column' }}
-                width={expanded ? 260 : 56}
+                width={56}
                 collapsible
             >
-
-
                 <Sidenav.Header>
                     <div style={headerStyles} className="dark_theme_pop_text">
                         <Icon icon="avatar" size="lg" style={{ verticalAlign: 0 }} />
-                        <span style={{ marginLeft: 12 }}> NAME</span>
                     </div>
                 </Sidenav.Header>
 
@@ -72,27 +68,23 @@ class SideBar extends React.Component {
                     <Sidenav.Body>
                         <Nav>
                             {/* DashBoard */}
-                            <Nav.Item eventKey="1" icon={<Icon icon="dashboard" />} to="/dashboard">Dashboard</Nav.Item>
+                            <Nav.Item eventKey="1" icon={<Icon icon="dashboard" />} to="/dashboard"></Nav.Item>
 
                             {/* My List */}
-                            <Nav.Item eventKey="2" icon={<Icon icon="list" />}>My List</Nav.Item>
+                            <Nav.Item eventKey="2" icon={<Icon icon="list" />}></Nav.Item>
 
                             {/* My Calendar */}
-                            <Nav.Item eventKey="3" icon={<Icon icon="calendar" />}>My Calendar</Nav.Item>
+                            <Nav.Item eventKey="3" icon={<Icon icon="calendar" />}></Nav.Item>
 
                             {/* Settings */}
-                            <Dropdown placement="rightStart" eventKey="4" title="Settings" icon={<Icon icon="gear-circle" />}>
+                            <Dropdown placement="rightStart" eventKey="4" icon={<Icon icon="gear-circle" />}>
                                 <Dropdown.Item eventKey="4-1">Account</Dropdown.Item>
                                 <Dropdown.Item eventKey="4-2">Customization</Dropdown.Item>
                                 <Dropdown.Item eventKey="4-3" onClick={this.handleSignOut}>Sign Out</Dropdown.Item>
                             </Dropdown>
                         </Nav>
                     </Sidenav.Body>
-
                 </Sidenav>
-                
-                {/* DarkModeToggle */}
-                <DarkModeToggle lightTheme={this.lightTheme} darkTheme={this.darkTheme} />
             </Sidebar>
         );
     }
