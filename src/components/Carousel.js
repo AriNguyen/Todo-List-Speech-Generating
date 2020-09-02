@@ -44,8 +44,10 @@ class Carousel extends React.Component {
     }
 
     makeItems = (items) => {
+      console.log(this.props.initItems)
         return items.map(item => {
-            return <Card item={item} click={(e => this.handleCardClick(item.id, e))} key={item.id} initItems={this.props.initItems} title={item.title}/>
+            return <Card item={item} click={(e => this.handleCardClick(item.id, e))}
+                    key={item.id} initItems={this.props.initItems} title={item.title}/>
         })
     }
 
