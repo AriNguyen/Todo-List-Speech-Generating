@@ -311,6 +311,18 @@ input:focus, textarea:focus, select:focus, button:focus {
   margin: 10px;
 }
 
+.ml-50 {
+  margin-left: 50px !important;
+}
+
+.mr-50 {
+  margin-right: 50px !important;
+}
+
+.mt-10 {
+  margin-top: 10px !important;
+}
+
 .fit {
   /* display: inline-block !important; */
   width: fit-content !important; 
@@ -327,4 +339,8 @@ input:focus, textarea:focus, select:focus, button:focus {
 
 .mh-100{
   min-height: 100% !important;
+}
+
+.textarea.rs-input {
+  min-width: none !important;
 }
