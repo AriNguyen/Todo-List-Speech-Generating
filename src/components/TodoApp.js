@@ -50,7 +50,7 @@ class TodoList extends React.Component {
                 "done" : "undone";
             return (
                 // <TodoListItem key={index} item={item} index={index} removeItem={this.props.removeItem} markTodoDone={this.props.markTodoDone} />
-                <li className="p-2 list-group-item dark_theme overflow-auto li_todo"
+                <li className="p-1 list-group-item dark_theme overflow-auto li_todo"
                     data-id={i}
                     key={i}
                     draggable='true'
@@ -148,15 +148,6 @@ class TodoForm extends React.Component {
     }
 }
 
-class TodoHeader extends React.Component {
-    constructor(props) {
-        super(props);
-        this.title = props.title;
-    }
-    render() {
-        return <h4>{this.title}</h4>;
-    }
-}
 
 class TodoApp extends React.Component {
     constructor(props) {
@@ -169,11 +160,6 @@ class TodoApp extends React.Component {
         this.title = props.title;
     }
     addItem(todoItem) {
-        // this.todoItems.unshift({
-        //     index: this.todoItems.length + 1,
-        //     value: todoItem.newItemValue,
-        //     done: false
-        // });
         this.todoItems.push(todoItem.newItemValue);
         this.setState({ todoItems: this.todoItems });
     }
@@ -191,7 +177,6 @@ class TodoApp extends React.Component {
     render() {
         return (
             <Col>
-                <TodoHeader title={this.title} />
                 <TodoList items={this.todoItems} removeItem={this.removeItem} markTodoDone={this.markTodoDone} />
                 <TodoForm addItem={this.addItem} />
             </Col>
