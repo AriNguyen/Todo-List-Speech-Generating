@@ -34,22 +34,22 @@ const darkTheme = {
 
 var todoItems = ["learn react", "Go shopping", "buy flowers"];
 var priority_list = [
-  {
-    "label": "1 (most important)",
-    "value": "1"
-  },
-  {
-    "label": "2",
-    "value": "2"
-  },
-  {
-    "label": "3",
-    "value": "3"
-  },
-  {
-    "label": "4",
-    "value": "4"
-  }
+    {
+        "label": "1 (most important)",
+        "value": "1"
+    },
+    {
+        "label": "2",
+        "value": "2"
+    },
+    {
+        "label": "3",
+        "value": "3"
+    },
+    {
+        "label": "4",
+        "value": "4"
+    }
 ]
 
 
@@ -86,21 +86,20 @@ class DashboardPage extends React.Component {
                 'user': this.state.user
             })
         })
-      })
-      .then( res => {
-        return res.json();
-      })
-      .then( data => {
-      // append user data to state array todoItems to display on carousel
-        let curTop = 0;
-        let tempList = [];
-        // console.log(data)
-        for( let i = 0; i < data.list.length; i++ ){
-          tempList.push(data.list[i].task);
-        }
-        this.setState({todoItems: tempList})
-      })
-      .catch(err => {console.error(err)})
+            .then(res => {
+                return res.json();
+            })
+            .then(data => {
+                // append user data to state array todoItems to display on carousel
+                let curTop = 0;
+                let tempList = [];
+                // console.log(data)
+                for (let i = 0; i < data.list.length; i++) {
+                    tempList.push(data.list[i].task);
+                }
+                this.setState({ todoItems: tempList })
+            })
+            .catch(err => { console.error(err) })
     }
 
     // handle click on the calendar to set date
@@ -153,13 +152,13 @@ class DashboardPage extends React.Component {
 
     // get task details from <Speech />
     handleNewSpeech = (newTextFromSpeech) => {
-      this.setState({task: newTextFromSpeech})
-      console.log(this.state)
+        this.setState({ task: newTextFromSpeech })
+        console.log(this.state)
     }
 
     handleDropdown = (value) => {
-      this.setState({priority: value})
-      console.log(value)
+        this.setState({ priority: value })
+        console.log(value)
     }
 
     // send username and new task info to /add in server
@@ -228,12 +227,12 @@ class DashboardPage extends React.Component {
 
                                             {/* Due date */}
                                             <InputPicker name="priority" className="no_border fit"
-                                              placeholder="Priotity"
-                                              onChange={this.handleDropdown}
-                                              value={this.state.priority}
-                                              inputRef={ref => {this.myDropdown = ref;}}
-                                              data={priority_list}
-                                              block
+                                                placeholder="Priotity"
+                                                onChange={this.handleDropdown}
+                                                value={this.state.priority}
+                                                inputRef={ref => { this.myDropdown = ref; }}
+                                                data={priority_list}
+                                                block
                                             />
                                         </Col>
                                     </Row>
@@ -242,9 +241,9 @@ class DashboardPage extends React.Component {
                                     <Button className="dark_theme_pop" type="submit" onClick={this.handleNewTask}>
                                         <Icon icon="plus" /> Add task
                                     </Button>
-                            </div>
-                        </Container>
-                    </Col>
+                                </div>
+                            </Container>
+                        </Col>
 
 
                         <Col sm={3}>
