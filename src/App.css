@@ -102,10 +102,6 @@ form[name="register"]{
   font-weight: bold;
 }
 
-#task-container{
-  padding: 10px;
-}
-
 #transcript{
   background-color: var(--background)
 }
@@ -241,7 +237,6 @@ ul>li:hover {
 .align {
   margin-top: 20px !important;
   margin-left: 50px !important;
-  padding: 10px;
 }
 
 .placeholder {
@@ -290,6 +285,22 @@ input:focus, textarea:focus, select:focus, button:focus {
   padding-bottom: 10px;
 }
 
+.p-10 {
+  padding: 10px;
+}
+
+.pt-20 {
+  padding-top: 20px;
+}
+
+.p-0 {
+  padding: 0px;;
+}
+
+.m-10 {
+  margin: 10px;
+}
+
 .fit {
   /* display: inline-block !important; */
   width: fit-content !important; 
@@ -304,8 +315,6 @@ input:focus, textarea:focus, select:focus, button:focus {
   width: 15% !important;
 }
 
-center {
-  margin: auto;
-  width: 50%;
-  padding: 10px;
+.mh-100{
+  min-height: 100% !important;
 }

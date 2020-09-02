@@ -1,29 +1,33 @@
 import React from 'react';
 
 import Card from '../components/Card'
-import { Container, Row } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
+
 
 class Carousel extends React.Component {
     constructor(props) {
         super(props);
+        this.itemsList = [
+            {
+                id: 0,
+                date: 'Today',
+                subTitle: JSON.stringify(props.date),
+                selected: false
+            },
+            {
+                id: 1,
+                date: 'Yesterday',
+                subTitle: '',
+                selected: false
+            },
+        ];
         this.state = {
-            items: [
-                {
-                    id: 0,
-                    title: 'Today',
-                    subTitle: '',
-                    link: '',
-                    selected: false
-                },
-                {
-                    id: 1,
-                    title: 'Yesterday',
-                    subTitle: '',
-                    link: '',
-                    selected: false
-                },
-            ]
+            items: this.itemsList
         }
+    }
+
+    componentWillReceiveProps( nextProps ){
+      console.log(nextProps)
     }
 
     handleCardClick = (id, card) => {
@@ -44,20 +48,21 @@ class Carousel extends React.Component {
     }
 
     makeItems = (items) => {
-      console.log(this.props.initItems)
         return items.map(item => {
-            return <Card item={item} click={(e => this.handleCardClick(item.id, e))}
-                    key={item.id} initItems={this.props.initItems} title={item.title}/>
+            return <Card item={item} click={(e => this.handleCardClick(item.id, e))} key={item.id} initItems={this.props.initItems} date={item.date} subTitle={item.subTitle}/>
         })
+    }
+
+    addItem(item) {
+        this.itemsList.push(item);
+        this.setState({ items: this.itemsList });
     }
 
     render() {
         return (
-            <Container className="p-0">
-                <Row className="align justify-content-between">
-                    {this.makeItems(this.state.items)}
-                </Row>
-            </Container>
+            <Col id="date_list" className="align fit p-10 d-flex justify-content-between">
+                {this.makeItems(this.state.items)}
+            </Col>
         )
     }
 }
