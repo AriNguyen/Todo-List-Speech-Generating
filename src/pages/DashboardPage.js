@@ -33,7 +33,24 @@ const darkTheme = {
 }
 
 var todoItems = ["learn react", "Go shopping", "buy flowers"];
-
+var priority_list = [
+  {
+    "label": "1 (most important)",
+    "value": "1"
+  },
+  {
+    "label": "2",
+    "value": "2"
+  },
+  {
+    "label": "3",
+    "value": "3"
+  },
+  {
+    "label": "4",
+    "value": "4"
+  }
+]
 
 class DashboardPage extends React.Component {
     constructor(props) {
@@ -46,11 +63,12 @@ class DashboardPage extends React.Component {
             display: "hide",
             todoItems: [],
         }
-    }
-
-    componentDidMount() {
         window.addEventListener('load', this.handleLoad);
     }
+
+    // componentWillMount() {
+    //     window.addEventListener('load', this.handleLoad);
+    // }
 
     handleLoad = e => {
         // e.preventDefault();
@@ -71,15 +89,14 @@ class DashboardPage extends React.Component {
         return res.json();
       })
       .then( data => {
-      // append user data to array displayData
+      // append user data to state array todoItems to display on carousel
         let curTop = 0;
         let tempList = [];
-        console.log(data)
-      for( let i = 0; i < data.list.length; i++ ){
-        tempList.push(data.list[i].task);
-      }
-      this.setState({todoItems: tempList})
-      console.log(this.state.todoItems)
+        // console.log(data)
+        for( let i = 0; i < data.list.length; i++ ){
+          tempList.push(data.list[i].task);
+        }
+        this.setState({todoItems: tempList})
       })
       .catch(err => {console.error(err)})
     }
@@ -92,8 +109,6 @@ class DashboardPage extends React.Component {
     }
 
 
-    // send username and new task info to /add in server
-    // handleNewTask = e => {
     // handle toglge option to display/hide the speech-to-text feature
     handleVoice() {
         if (this.state.display === "hide") {
@@ -132,6 +147,17 @@ class DashboardPage extends React.Component {
         }
         recognition.start();
 
+    }
+
+    // get task details from <Speech />
+    handleNewSpeech = (newTextFromSpeech) => {
+      this.setState({task: newTextFromSpeech})
+      console.log(this.state)
+    }
+
+    handleDropdown = (value) => {
+      this.setState({priority: value})
+      console.log(value)
     }
 
     // send username and new task info to /add in server
@@ -188,7 +214,8 @@ class DashboardPage extends React.Component {
                                         <Row id="taskInfo" className="pb-10">
                                             <Col sm={7}>
                                                 {/* Speech Recognition */}
-                                                <Speech />
+                                                <Speech newSpeech={this.handleNewSpeech} />
+
                                             </Col>
 
                                             <Col sm={4}>
@@ -200,7 +227,14 @@ class DashboardPage extends React.Component {
                                                 </InputGroup>
 
                                                 {/* Due date */}
-                                                <InputPicker className="no_border fit" placeholder="Priotity" />
+                                                <InputPicker name="priority" className="no_border fit"
+                                                  placeholder="Priotity"
+                                                  onChange={this.handleDropdown}
+                                                  value={this.state.priority}
+                                                  inputRef={ref => {this.myDropdown = ref;}}
+                                                  data={priority_list}
+                                                />
+
                                             </Col>
                                         </Row>
 
@@ -214,6 +248,7 @@ class DashboardPage extends React.Component {
 
                                 {/* Tasks Containers */}
                                 <Carousel initItems={this.state.todoItems} />
+                                <div>{this.state.todoItems} </div>
                             </Col>
 
 

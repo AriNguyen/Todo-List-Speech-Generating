@@ -143,6 +143,7 @@ app.post("/add", function (req, res) {
   let priority = req.body.priority;
   let task = req.body.task;
 
+  console.log(req.body)
   pool.query(`INSERT INTO ${user}(date, priority, task) VALUES($1, $2, $3);`,
                                   [date, priority, task]
   )

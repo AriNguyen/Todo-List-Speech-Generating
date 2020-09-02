@@ -17,14 +17,20 @@ recognition.lang = 'en-US'
 
 class Speech extends Component {
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       listening: false,
       text: '',
     }
     this.toggleListen = this.toggleListen.bind(this)
     this.handleListen = this.handleListen.bind(this)
+  }
+
+  handleChange = () => {
+    let task = this.myInput.value;
+    this.props.newSpeech(task);
+    // this.setState({task: this.myInput.value})
   }
 
   toggleListen() {
@@ -104,7 +110,12 @@ class Speech extends Component {
             <InputGroup.Addon>
               <Icon onClick={this.toggleListen} icon="microphone" />
             </InputGroup.Addon>
-            <Input id="transcript"/> 
+            <Input
+              id="transcript"
+              inputRef={ref => {this.myInput = ref;}}
+              /*value={this.state.text}*/
+              onChange={this.handleChange}
+            />
           </InputGroup>
       </Container>
     )
