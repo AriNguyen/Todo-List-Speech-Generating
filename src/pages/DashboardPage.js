@@ -230,7 +230,7 @@ class DashboardPage extends React.Component {
                                             </InputGroup>
 
                                             {/* Due date */}
-                                            <InputPicker name="priority" className="no_border fit"
+                                            <InputPicker name="priority" className="no_border"
                                                 placeholder="Priotity"
                                                 onChange={this.handleDropdown}
                                                 value={this.state.priority}
@@ -269,7 +269,7 @@ class DashboardPage extends React.Component {
                     </Row>
 
                     {/* Tasks Containers */}
-                    <Container >
+                    <Container className="mt-10">
                         <Row className="align">
                             <h3>This Week</h3>
                         </Row>
@@ -277,9 +277,9 @@ class DashboardPage extends React.Component {
                             <Carousel initItems={this.state.todoItems} date={this.state.date} />
                         </Row>
 
-                        <Divider className="align" />
+                        <Divider className="ml-50 mr-50" />
 
-                        <Row className="align">
+                        <Row className="ml-50">
                             <h3>Next Week</h3>
                         </Row>
                         <Row>
