@@ -8,6 +8,8 @@ import Speech from '../components/SpeechRecognition'
 import Carousel from '../components/Carousel'
 import SideBar from '../components/SideBar'
 import DarkModeToggle from '../components/DarkModeToggle'
+import { findAllByText } from '@testing-library/react';
+import { scryRenderedDOMComponentsWithTag } from 'react-dom/test-utils';
 
 const white = "#FFFFFF";
 const black = "#272b34";
@@ -194,6 +196,7 @@ class DashboardPage extends React.Component {
 
 
     render() {
+        let calWidth = 'calc(100% - 40px)';
         let myTheme = createTheme(darkTheme, lightTheme);
         return (
             <Container className="h-100" style={{ backgroundColor: myTheme.background, color: myTheme.text }}>
@@ -218,6 +221,7 @@ class DashboardPage extends React.Component {
                                         </Col>
 
                                         <Col>
+                                            {/* Show date pick from calendar */}
                                             <InputGroup className="pb-10 no_border">
                                                 <InputGroup.Addon>
                                                     <Icon icon="calendar" />
@@ -246,13 +250,13 @@ class DashboardPage extends React.Component {
                         </Col>
 
 
-                        <Col sm={3}>
+                        <Col sm={3} style={{overflow: "hidden", position: "relative"}}>
                             {/* DarkModeToggle */}
-                            <div>
+                            <Row className="d-flex justify-content-end align-middle" style={{height: "40px",  paddingTop: "12px"}}>
                                 <DarkModeToggle lightTheme={lightTheme} darkTheme={darkTheme} />
-                            </div>
+                            </Row>
 
-                            <Row className="mh-100">
+                            <Row style={{height: calWidth}}>
                                 {/* Calendar */}
                                 <Calendar
                                     id="calendar"
@@ -283,11 +287,8 @@ class DashboardPage extends React.Component {
                             <div>{this.state.todoItems} </div>
                         </Row>
                     </Container>
-
-
                 </Container>
             </Container>
-            // </div >
         );
     }
 }
