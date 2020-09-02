@@ -43,7 +43,7 @@
 }
 .form{
   position: relative;
-  top: 10%
+  top: 15%
 }
 form[name="authinfo"]{
   position: relative;
@@ -51,7 +51,17 @@ form[name="authinfo"]{
   right: 5%;
   display: block;
   box-sizing: border-box;
-  
+}
+
+#fullScreen{
+  position:fixed;
+    padding:0;
+    margin:0;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background:rgba(255,255,255,0.5);
 }
 
 
@@ -301,6 +311,18 @@ input:focus, textarea:focus, select:focus, button:focus {
   margin: 10px;
 }
 
+.ml-50 {
+  margin-left: 50px !important;
+}
+
+.mr-50 {
+  margin-right: 50px !important;
+}
+
+.mt-10 {
+  margin-top: 10px !important;
+}
+
 .fit {
   /* display: inline-block !important; */
   width: fit-content !important; 
@@ -317,4 +339,8 @@ input:focus, textarea:focus, select:focus, button:focus {
 
 .mh-100{
   min-height: 100% !important;
+}
+
+.textarea.rs-input {
+  min-width: none !important;
 }

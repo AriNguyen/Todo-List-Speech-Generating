@@ -1,7 +1,7 @@
 import React from 'react';
 
 import TodoApp from '../components/TodoApp'
-import { Container } from 'rsuite'
+import { Container } from 'react-bootstrap'
 
 class Card extends React.Component {
   constructor(props) {
@@ -28,11 +28,14 @@ class Card extends React.Component {
     console.log(this.props.initItems)
     let temp = ["dcm", "d chay nua", "thi chiu"]
     return (
-      <div className="d-inline-block a-card overflow-auto" >
-      <h4>{this.props.date}</h4>
-      <p>{this.props.subTitle}</p>
-      <TodoApp initItems={this.props.initItems} />
-      </div>
+        <div className="d-inline-block a-card overflow-auto" style={{marginRight: "20px"}}>
+            <Container className="p-20">
+                <h4>{props.date}</h4>
+                <p>{props.subTitle}</p>
+            </Container>
+
+            <TodoApp initItems={this.props.initItems} />
+        </div>
     );
   }
 }

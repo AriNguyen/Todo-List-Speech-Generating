@@ -59,7 +59,6 @@ class TodoList extends React.Component {
             var todoClass = item.done ?
                 "done" : "undone";
             return (
-                // <TodoListItem key={index} item={item} index={index} removeItem={this.props.removeItem} markTodoDone={this.props.markTodoDone} />
                 <li className="p-1 list-group-item dark_theme overflow-auto li_todo"
                     data-id={i}
                     key={i}

@@ -60,7 +60,7 @@ class Carousel extends React.Component {
 
     render() {
         return (
-            <Col id="date_list" className="align fit p-10 d-flex justify-content-between">
+            <Col id="date_list" className="align">
                 {this.makeItems(this.state.items)}
             </Col>
         )
