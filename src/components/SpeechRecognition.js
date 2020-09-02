@@ -25,6 +25,8 @@ class Speech extends Component {
     }
     this.toggleListen = this.toggleListen.bind(this)
     this.handleListen = this.handleListen.bind(this)
+    this.handleButtonClick = this.handleButtonClick.bind(this)
+    this.changeIcon = this.changeIcon.bind(this)
   }
 
   handleChange = () => {
@@ -36,7 +38,22 @@ class Speech extends Component {
   toggleListen() {
     this.setState({
       listening: !this.state.listening
-    }, this.handleListen)
+    }, this.handleListen);
+  }
+
+  changeIcon() {
+    let micro = document.getElementById("micro");
+    if (micro.style.color == "red") {
+      micro.style.color = "black";
+    }
+    else if (micro.style.color == "black") {
+      micro.style.color = "red";
+    }
+  }
+
+  handleButtonClick() {
+    this.toggleListen();
+    this.changeIcon();
   }
 
   handleListen() {
@@ -96,24 +113,23 @@ class Speech extends Component {
     recognition.onerror = event => {
       console.log("Error occurred in recognition: " + event.error)
     }
-
   }
 
-  childFunction(){
+  childFunction() {
     this.props.functionCallFromParent("Hello From SpeechRecognition");
-}
+  }
 
   render() {
     return (
       <Container className="p-10">
-          <InputGroup className="no_border" style={{ width: 380, height: 75 }}>
-            <InputGroup.Addon>
-              <Icon onClick={this.toggleListen} icon="microphone" />
+          <InputGroup className="no_border" style={{ height: 75 }}>
+            <InputGroup.Addon onClick={this.handleButtonClick}>
+              <Icon id="micro" icon="microphone" size="2x" style={{color: "black"}}
+              onClick={this.toggleListen}  />
             </InputGroup.Addon>
-            <Input
+            <Input componentClass="textarea" rows={3}
               id="transcript"
               inputRef={ref => {this.myInput = ref;}}
-              /*value={this.state.text}*/
               onChange={this.handleChange}
             />
           </InputGroup>
@@ -121,7 +137,5 @@ class Speech extends Component {
     )
   }
 }
-
-
 
 export default Speech

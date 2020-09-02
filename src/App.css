@@ -107,7 +107,6 @@ form[name="register"]{
 }
 
 #transcript{
-  width: 340px;
   background-color: var(--background)
 }
 
@@ -296,6 +295,17 @@ input:focus, textarea:focus, select:focus, button:focus {
   width: fit-content !important; 
 }
 
-.container {
+.border-10 {
   border-radius: 10px;
+}
+
+.rs-input-group-addon {
+  justify-content: center !important;
+  width: 15% !important;
+}
+
+center {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
 }
