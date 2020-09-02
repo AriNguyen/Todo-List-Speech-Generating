@@ -7,20 +7,21 @@ import { createTheme } from 'react-dark-theme'
 import Speech from '../components/SpeechRecognition'
 import Carousel from '../components/Carousel'
 import SideBar from '../components/SideBar'
+import DarkModeToggle from '../components/DarkModeToggle'
 
 const white = "#FFFFFF";
 const black = "#272b34";
 const gray_black = "#272b34";
-// const gray_black2 = "#393c47";
 const gray = "#F8F8F9";
 const dark_black = "#202229";
+const green = "#1ffb7e";
 
 const lightTheme = {
     background: white,
     text: black,
     secondary: gray,
     third: black,
-    popcolor: black
+    popcolor: "#14d969"
 }
 
 const darkTheme = {
@@ -28,7 +29,7 @@ const darkTheme = {
     text: white,
     secondary: dark_black,
     third: dark_black,
-    popcolor: "#1ffb7e"
+    popcolor: green
 }
 
 var todoItems = ["learn react", "Go shopping", "buy flowers"];
@@ -51,6 +52,7 @@ var priority_list = [
   }
 ]
 
+
 class DashboardPage extends React.Component {
     constructor(props) {
         super(props);
@@ -71,17 +73,18 @@ class DashboardPage extends React.Component {
 
     handleLoad = e => {
         // e.preventDefault();
-      this.setState({ 'user': window.location.search.split('=')[1] })
+        this.setState({ 'user': window.location.search.split('=')[1] })
 
-      // get user data from database and append to the DOM
-      fetch('/get', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-auth': window.localStorage.getItem("token")
-        },
-        body: JSON.stringify({
-          'user': this.state.user
+        // get user data from database and append to the DOM
+        fetch('/get', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-auth': window.localStorage.getItem("token")
+            },
+            body: JSON.stringify({
+                'user': this.state.user
+            })
         })
       })
       .then( res => {
@@ -194,83 +197,98 @@ class DashboardPage extends React.Component {
     render() {
         let myTheme = createTheme(darkTheme, lightTheme);
         return (
-            <div className="show-fake-browser sidebar-page h-100">
-                <Container className="h-100" style={{ backgroundColor: myTheme.background, color: myTheme.text }}>
-                    <SideBar backgroundColor={myTheme.secondary} color={myTheme.text} lightTheme={lightTheme} darkTheme={darkTheme}/>
-                    <Container>
-                        <Row>
-                            <Col sm={9} className="m-10">
-                                {/* User Greeting */}
-                                <Header className="align theme_border">
-                                    <h2 style={{ color: myTheme.popcolor }}>Hello {this.state.user}</h2>
-                                    <p>Let's get started with your day</p>
-                                    <p style={{ fontSize: "16pt" }}>You have <span style={{ color: "yellow", fontSize: "18pt", fontWeight: "bold" }}>4</span> tasks coming up today and <span style={{ color: "red", fontSize: "18pt", fontWeight: "bold" }}>2</span> pending task for yesterday</p>
-                                </Header>
+            <Container className="h-100" style={{ backgroundColor: myTheme.background, color: myTheme.text }}>
+                <SideBar backgroundColor={myTheme.secondary} color={myTheme.text} lightTheme={lightTheme} darkTheme={darkTheme} />
+                <Container>
+                    <Row>
+                        <Col sm={9} className="pt-20">
+                            {/* User Greeting */}
+                            <Header className="align theme_border p-10">
+                                <h2 style={{ color: myTheme.popcolor }}>Hello {this.state.user}</h2>
+                                <p>Let's get started with your day</p>
+                                <p style={{ fontSize: "16pt" }}>You have <span style={{ color: "yellow", fontSize: "18pt", fontWeight: "bold" }}>4</span> tasks coming up today and <span style={{ color: "red", fontSize: "18pt", fontWeight: "bold" }}>2</span> pending task for yesterday</p>
+                            </Header>
 
-                                {/* Speech Recognition to add tasks */}
-                                <Container fluid className="m-10">
-                                    <div id="task-container" className="align dark_theme border-10">
-                                        <Row id="taskInfo" className="pb-10">
-                                            <Col sm={8}>
-                                                {/* Speech Recognition */}
-                                                <Speech newSpeech={this.handleNewSpeech} />
+                            {/* Speech Recognition to add tasks */}
+                            <Container fluid className="">
+                                <div id="task-container" className="align p-10 dark_theme border-10">
+                                    <Row id="taskInfo" className="pb-10 ">
+                                        <Col sm={8}>
+                                            {/* Speech Recognition */}
+                                            <Speech newSpeech={this.handleNewSpeech} />
+                                        </Col>
 
-                                            </Col>
+                                        <Col>
+                                            <InputGroup className="pb-10 no_border">
+                                                <InputGroup.Addon>
+                                                    <Icon icon="calendar" />
+                                                </InputGroup.Addon>
+                                                <Input className="" name="date" placeholder="Due date" value={this.state.date} onChange={this.handleChange} />
+                                            </InputGroup>
 
-                                            <Col>
-                                                <InputGroup className="pb-10 no_border">
-                                                    <InputGroup.Addon>
-                                                        <Icon icon="calendar"/>
-                                                    </InputGroup.Addon>
-                                                    <Input className="" name="date" placeholder="Due date" value={this.state.date} onChange={this.handleChange} />
-                                                </InputGroup>
+                                            {/* Due date */}
+                                            <InputPicker name="priority" className="no_border fit"
+                                              placeholder="Priotity"
+                                              onChange={this.handleDropdown}
+                                              value={this.state.priority}
+                                              inputRef={ref => {this.myDropdown = ref;}}
+                                              data={priority_list}
+                                              block
+                                            />
+                                        </Col>
+                                    </Row>
 
-                                                {/* Due date */}
-                                                <InputPicker name="priority" className="no_border fit"
-                                                  placeholder="Priotity"
-                                                  onChange={this.handleDropdown}
-                                                  value={this.state.priority}
-                                                  inputRef={ref => {this.myDropdown = ref;}}
-                                                  data={priority_list}
-                                                  block
-                                                />
-
-                                            </Col>
-                                        </Row>
-
-                                        {/* Submit */}
-                                        <Button className="dark_theme_pop" type="submit" onClick={this.handleNewTask}>
-                                            <Icon icon="plus" /> Add task
-                                        </Button>
-                                    </div>
-
-                                </Container>
-
-                                {/* Tasks Containers */}
-                                <Carousel initItems={this.state.todoItems} />
-                                <div>{this.state.todoItems} </div>
-                            </Col>
+                                    {/* Submit */}
+                                    <Button className="dark_theme_pop" type="submit" onClick={this.handleNewTask}>
+                                        <Icon icon="plus" /> Add task
+                                    </Button>
+                            </div>
+                        </Container>
+                    </Col>
 
 
-                            <Col sm={3}>
+                        <Col sm={3}>
+                            {/* DarkModeToggle */}
+                            <div>
+                                <DarkModeToggle lightTheme={lightTheme} darkTheme={darkTheme} />
+                            </div>
 
-
+                            <Row className="mh-100">
                                 {/* Calendar */}
-                                <div id="calendar" className="p-0">
-                                    <Calendar
-                                        onChange={this.onChange}
-                                        value={this.state.date}
-                                        className="dark_theme"
-                                    />
-                                </div>
+                                <Calendar
+                                    id="calendar"
+                                    className="dark_theme border-10 p-10"
+                                    onChange={this.onChange}
+                                    value={this.state.date}
+                                />
+                            </Row>
+                        </Col>
+                    </Row>
 
-                                {/* Priority tasks */}
-                                {/* <TodoApp initItems={todoItems} /> */}
-                            </Col>
+                    {/* Tasks Containers */}
+                    <Container >
+                        <Row className="align">
+                            <h3>This Week</h3>
+                        </Row>
+                        <Row >
+                            <Carousel initItems={this.state.todoItems} date={this.state.date} />
+                        </Row>
+
+                        <Divider className="align" />
+
+                        <Row className="align">
+                            <h3>Next Week</h3>
+                        </Row>
+                        <Row>
+                            <Carousel initItems={this.state.todoItems} date={this.state.date} />
+                            <div>{this.state.todoItems} </div>
                         </Row>
                     </Container>
+
+
                 </Container>
-            </div >
+            </Container>
+            // </div >
         );
     }
 }
