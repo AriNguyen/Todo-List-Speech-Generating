@@ -123,8 +123,8 @@ class LoginPage extends React.Component {
   render(){
     let myTheme = createTheme(darkTheme, lightTheme);
     return (
-        <div id='fullScreen'>  
-            
+        <div className='fullScreen'>  
+
             <div className="h-100 " style={{ backgroundColor: myTheme.background, color: myTheme.text}}>
                 <DarkModeToggle lightTheme={lightTheme} darkTheme={darkTheme}  />
                 <button className="button dark_theme_pop" style={{display: 'inline', position:'absolute', top: '5px', left: '5px'}} onClick={ () => this.handleClick() }>
@@ -198,8 +198,8 @@ class LoginPage extends React.Component {
               </div>
             </div>
           </div>
-         
-    
+
+
     );
   }
 }

@@ -53,7 +53,7 @@ form[name="authinfo"]{
   box-sizing: border-box;
 }
 
-#fullScreen{
+.fullScreen{
   position:fixed;
     padding:0;
     margin:0;
@@ -147,7 +147,7 @@ html, body {
 }
 
 h1 {
-  margin: 20px 0 15px 0;  
+  margin: 20px 0 15px 0;
 }
 
 #main {
@@ -224,12 +224,12 @@ ul>li:hover {
   border: 0px solid var(--third) !important;
 }
 
-.dark_theme_pop {  
+.dark_theme_pop {
   background-color: var(--popcolor) !important;
 }
 
 
-.dark_theme_pop_text {  
+.dark_theme_pop_text {
   background-color: var(--secondary) !important;
   color: var(--popcolor) !important;
   border: 0px solid var(--third) !important;
@@ -325,7 +325,7 @@ input:focus, textarea:focus, select:focus, button:focus {
 
 .fit {
   /* display: inline-block !important; */
-  width: fit-content !important; 
+  width: fit-content !important;
 }
 
 .border-10 {

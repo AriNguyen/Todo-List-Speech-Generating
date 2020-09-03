@@ -102,7 +102,7 @@ class DashboardPage extends React.Component {
             let tempList = [];
             // console.log(data)
             for (let i = 0; i < data.list.length; i++) {
-                tempList.push(data.list[i].task);
+                tempList.push(data.list[i]);
             }
             this.setState({ todoItems: tempList })
         })
@@ -200,7 +200,81 @@ class DashboardPage extends React.Component {
         })
     }
 
-    createCarousel = () => {
+    createTable = () => {
+      var items = this.state.todoItems;
+      var date_ord = [];
+
+      items.sort( (a, b) => {
+        return new Date(a.date) - new Date(b.date);
+      })
+      console.log(items);
+
+      for( let i = 0; i < items.length; i++ ){
+        let cur_date = items[i].date;
+        if( date_ord.length === 0 ){
+          date_ord.push({
+            date: items[i].date,
+            detail: [{
+              priority: items[i].priority,
+              task: items[i].task
+            }]
+          })
+        }else{
+          let same_date = false;
+          for( let z = 0; z < date_ord.length; z++ ){
+            if( cur_date == date_ord[z].date ){
+              same_date = true;
+              date_ord[z].detail.push({
+                priority: items[i].priority,
+                task: items[i].task
+              });
+            }
+          }
+          if( same_date ){
+            same_date = false;
+          }else{
+            date_ord.push({
+              date: items[i].date,
+              detail: [{
+                priority: items[i].priority,
+                task: items[i].task
+              }]
+            })
+          }
+        }
+      }
+      console.log(date_ord)
+
+      // if( this.state.todoItems.lendth === 0 ){
+      //   return (
+      //     <div> Loading </div>
+      //   )
+      // }else{
+      return (
+        <div>
+        {date_ord.map( function(by_date, i) {
+          console.log(by_date)
+          return (
+            <table> {by_date.date}
+            <tbody>
+            <tr>
+            <th>Priority</th>
+            <th>Task</th>
+            </tr>
+            {by_date.detail.map(function (item, index) {
+              return (
+                <tr>
+                <td witdh="100px"> {item.priority} </td>
+                <td width="500px"> {item.task} </td>
+                </tr>
+              )
+            })}
+            </tbody>
+            </table>
+          )
+        })}
+        </div>
+      );
 
     }
 
@@ -285,23 +359,26 @@ class DashboardPage extends React.Component {
                         <Row className="align">
                             <h3>This Week</h3>
                         </Row>
-                        <Row >
+                        {/*<Row >
                             <Carousel initItems={this.state.todoItems} date={this.state.date} />
+                        </Row>*/}
+                        <Row>
+                          {this.createTable()}
                         </Row>
-
-                        <Divider className="ml-50 mr-50" />
+                        {/*<Divider className="ml-50 mr-50" />
 
                         <Row className="ml-50">
-                            <h3>Next Week</h3>
+                          <h3>Next Week</h3>
                         </Row>
                         <Row>
-                            <Carousel initItems={this.state.todoItems} date={this.state.date} />
+                          <Carousel initItems={this.state.todoItems} date={this.state.date} />
+                        </Row>*/}
 
-                        </Row>
-                        
                     </Container>
+                    <div> {this.createCarousel} </div>
                 </Container>
             </Container>
+
         );
 
     }

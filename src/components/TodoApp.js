@@ -78,7 +78,7 @@ class TodoList extends React.Component {
                 </li>
             );
         });
-        // console.log(this.state)
+
         return (
             <ul className="list-group ul_todo" onDragOver={this.dragOver.bind(this)}>
                 {items}
@@ -191,7 +191,6 @@ class TodoApp extends React.Component {
     }
     render() {
       // console.log(this.props.initItems)
-      console.log(this.state)
         return (
             <Col>
                 <TodoList items={this.props.initItems} removeItem={this.removeItem} markTodoDone={this.markTodoDone} />
