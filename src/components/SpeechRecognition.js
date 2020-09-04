@@ -36,9 +36,11 @@ class Speech extends Component {
   }
 
   toggleListen() {
+    console.log(this.state.listening)
     this.setState({
-      listening: !this.state.listening
+      listening: !(this.state.listening),
     }, this.handleListen);
+    console.log(this.state)
   }
 
   changeIcon() {
@@ -66,7 +68,6 @@ class Speech extends Component {
         console.log("...continue listening...")
         recognition.start()
       }
-
     } else {
       recognition.stop()
       recognition.onend = () => {
@@ -103,7 +104,12 @@ class Speech extends Component {
         recognition.onend = () => {
           console.log('Stopped listening per command')
           const finalText = transcriptArr.slice(0, -3).join(' ')
-          this.setState({ text: finalText });
+          this.setState({
+            listening: false,
+            text: finalText
+          });
+          textarea.value = this.state.text;
+          this.changeIcon();
         }
       }
     }
@@ -124,8 +130,7 @@ class Speech extends Component {
       <Container>
           <InputGroup className="no_border" style={{ height: 75 }}>
             <InputGroup.Addon onClick={this.handleButtonClick}>
-              <Icon id="micro" icon="microphone" size="2x" style={{color: "black"}}
-              onClick={this.toggleListen}  />
+              <Icon id="micro" icon="microphone" size="2x" style={{color: "black"}} />
             </InputGroup.Addon>
             <Input componentClass="textarea" rows={3}
               id="transcript"

@@ -72,11 +72,7 @@ class DashboardPage extends React.Component {
 
     componentDidMount() {
         window.addEventListener('load', this.handleLoad);
-        // setInterval(this.handleLoad, 5000);
-        // setTimeout(function() {
-        //   this.setState({render: true})
-        // }.bind(this), 1000);
-
+        // setInterval(this.handleLoad, 3000);
     }
 
     handleLoad = e => {
@@ -263,7 +259,7 @@ class DashboardPage extends React.Component {
             </tr>
             {by_date.detail.map(function (item, index) {
               return (
-                <tr className="row-content ">
+                <tr className="row-content" >
                 <td className="col-priority"> {item.priority} </td>
                 <td className="col-content"> {item.task} </td>
                 </tr>

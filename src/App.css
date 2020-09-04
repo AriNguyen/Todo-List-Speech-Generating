@@ -353,12 +353,12 @@ input:focus, textarea:focus, select:focus, button:focus {
   position: relative;
   left: 120px;
   width: 90px;
-  height: 100px;
+  height: max-content;
 }
 .bigTable{
   color: red;
   font-size: 22px;
-  width: 860px;
+  width: 1145px;
   height: max-content;
   position: relative;
   left: 60px;
