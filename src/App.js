@@ -38,14 +38,4 @@ class App extends React.Component {
   }
 }
 
-// const App = () => (
-//   <Router>
-//     <Switch>
-//       <Route path="/" component={LoginPage} />
-//       <Route path="/dashboard" component={DashboardPage} />
-//     </Switch>
-//   </Router>
-// );
-
-
 export default App;
