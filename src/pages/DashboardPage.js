@@ -356,15 +356,12 @@ class DashboardPage extends React.Component {
 
                     {/* Tasks Containers */}
                     <Container className="mt-10">
-                        <Row className="align">
-                            <h3>This Week</h3>
-                        </Row>
-                        {/*<Row >
-                            <Carousel initItems={this.state.todoItems} date={this.state.date} />
-                        </Row>*/}
-                        <Row>
+                      <Col sm={9}>
+                        <Row sm={8} className="align">
+                          <h3>This Week</h3>
                           {this.createTable()}
                         </Row>
+                      </Col>
                         {/*<Divider className="ml-50 mr-50" />
 
                         <Row className="ml-50">
