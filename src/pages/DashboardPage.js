@@ -222,7 +222,7 @@ class DashboardPage extends React.Component {
         }else{
           let same_date = false;
           for( let z = 0; z < date_ord.length; z++ ){
-            if( cur_date == date_ord[z].date ){
+            if( cur_date === date_ord[z].date ){
               same_date = true;
               date_ord[z].detail.push({
                 priority: items[i].priority,
@@ -356,30 +356,8 @@ class DashboardPage extends React.Component {
 
                     {/* Tasks Containers */}
                     <Container className="mt-10">
-                      <Col sm={9}>
-                        <Row sm={8} className="align">
-                          
-                        <Row className="align">
-
-                        </Row>
-                        {/*<Row >
-                            <Carousel initItems={this.state.todoItems} date={this.state.date} />
-                        </Row>*/}
-                        <Row>
-                          {this.createTable()}
-                        </Row>
-                      </Col>
-                        {/*<Divider className="ml-50 mr-50" />
-
-                        <Row className="ml-50">
-                          <h3>Next Week</h3>
-                        </Row>
-                        <Row>
-                          <Carousel initItems={this.state.todoItems} date={this.state.date} />
-                        </Row>*/}
-
+                        {this.createTable()}
                     </Container>
-                    <div> {this.createCarousel} </div>
                 </Container>
             </Container>
 

@@ -320,7 +320,7 @@ input:focus, textarea:focus, select:focus, button:focus {
 }
 
 .mt-10 {
-  margin-top: 10px !important;
+  margin-top: 40px !important;
 }
 
 .fit {
@@ -346,29 +346,30 @@ input:focus, textarea:focus, select:focus, button:focus {
 }
 
 /*----------Tasks display-------*/
-.bigTable{
-  margin-top: 30px;
-  color: red;
-  font-size: 22px;
-  width: 1190px;
-  height: 220px;
-  position: relative;
-  left: 70px;
-  border-radius: 10px;
-}
 .smallTable{
   font-size: 18px;
-  color: white;
-  margin: auto;
-  position: absolute;
+  /* color: red; */
+  /* margin: auto; */
+  position: relative;
   left: 120px;
-  width: 90%;
+  width: 90px;
+  height: 100px;
 }
+.bigTable{
+  color: red;
+  font-size: 22px;
+  width: 860px;
+  height: max-content;
+  position: relative;
+  left: 60px;
+  border-radius: 10px;
+}
+
 .row-content{
   margin: 5px;
 }
 .col-content{
-  height: 50px;
+  height: 40px;
 }
 
 .col-priority{
