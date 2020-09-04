@@ -344,3 +344,37 @@ input:focus, textarea:focus, select:focus, button:focus {
 .textarea.rs-input {
   min-width: none !important;
 }
+
+/*----------Tasks display-------*/
+.bigTable{
+  margin-top: 30px;
+  color: red;
+  font-size: 22px;
+  width: 1190px;
+  height: 220px;
+  position: relative;
+  left: 70px;
+  border-radius: 10px;
+}
+.smallTable{
+  font-size: 18px;
+  color: white;
+  margin: auto;
+  position: absolute;
+  left: 120px;
+  width: 90%;
+}
+.row-content{
+  margin: 5px;
+}
+.col-content{
+  height: 50px;
+}
+
+.col-priority{
+  width: 150px;
+}
+
+.col-task{
+  width: 500px;
+}
