@@ -152,6 +152,17 @@ app.post("/add", function (req, res) {
   res.status(200).send();
 })
 
+app.post("remove", function (req,res) {
+  let user = req.body.user;
+  let date = req.body.date.split("T")[0]; //cut time, in yyyy-mm-dd
+  let priority = req.body.priority;
+  let task = req.body.task;
+  
+  pool.query(`DELETE FROM ${user} WHERE task=${task}`
+  )
+  .catch(err => {console.error(err)});
+})
+
 app.post("/get", function (req, res) {
   let user = req.body.user;
   let list;

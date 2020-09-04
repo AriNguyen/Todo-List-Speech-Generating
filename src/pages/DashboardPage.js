@@ -59,6 +59,7 @@ class DashboardPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            render: false,
             user: '',
             date: new Date(),
             priority: '',
@@ -66,12 +67,17 @@ class DashboardPage extends React.Component {
             display: "hide",
             todoItems: [],
         }
-        window.addEventListener('load', this.handleLoad);
+        //window.addEventListener('load', this.handleLoad);
     }
 
-    // componentWillMount() {
-    //     window.addEventListener('load', this.handleLoad);
-    // }
+    componentDidMount() {
+        window.addEventListener('load', this.handleLoad);
+        // setInterval(this.handleLoad, 5000);
+        // setTimeout(function() {
+        //   this.setState({render: true})
+        // }.bind(this), 1000);
+
+    }
 
     handleLoad = e => {
         // e.preventDefault();
@@ -88,20 +94,20 @@ class DashboardPage extends React.Component {
                 'user': this.state.user
             })
         })
-            .then(res => {
-                return res.json();
-            })
-            .then(data => {
-                // append user data to state array todoItems to display on carousel
-                let curTop = 0;
-                let tempList = [];
-                // console.log(data)
-                for (let i = 0; i < data.list.length; i++) {
-                    tempList.push(data.list[i].task);
-                }
-                this.setState({ todoItems: tempList })
-            })
-            .catch(err => { console.error(err) })
+        .then(res => {
+            return res.json();
+        })
+        .then(data => {
+            // append user data to state array todoItems to display on carousel
+            let tempList = [];
+            // console.log(data)
+            for (let i = 0; i < data.list.length; i++) {
+                tempList.push(data.list[i]);
+            }
+            this.setState({ todoItems: tempList })
+        })
+        .catch(err => { console.error(err) })
+        console.log(this.state)
     }
 
     // handle click on the calendar to set date
@@ -194,10 +200,90 @@ class DashboardPage extends React.Component {
         })
     }
 
+    createTable = () => {
+      var items = this.state.todoItems;
+      var date_ord = [];
+
+      items.sort( (a, b) => {
+        return new Date(a.date) - new Date(b.date);
+      })
+      console.log(items);
+
+      for( let i = 0; i < items.length; i++ ){
+        let cur_date = items[i].date;
+        if( date_ord.length === 0 ){
+          date_ord.push({
+            date: items[i].date,
+            detail: [{
+              priority: items[i].priority,
+              task: items[i].task
+            }]
+          })
+        }else{
+          let same_date = false;
+          for( let z = 0; z < date_ord.length; z++ ){
+            if( cur_date === date_ord[z].date ){
+              same_date = true;
+              date_ord[z].detail.push({
+                priority: items[i].priority,
+                task: items[i].task
+              });
+            }
+          }
+          if( same_date ){
+            same_date = false;
+          }else{
+            date_ord.push({
+              date: items[i].date,
+              detail: [{
+                priority: items[i].priority,
+                task: items[i].task
+              }]
+            })
+          }
+        }
+      }
+      console.log(date_ord)
+      
+      // if( this.state.todoItems.lendth === 0 ){
+      //   return (
+      //     <div> Loading </div>
+      //   )
+      // }else{
+      return (
+        <div>
+        {date_ord.map( function(by_date, i) {
+          console.log(by_date)
+          return (
+            <table className="bigTable dark_theme"> {by_date.date}
+            <tbody className="smallTable dark_theme">
+            <tr className="row-content">
+            <th className="col-priority ">Priority</th>
+            <th className="col-task">Task</th>
+            </tr>
+            {by_date.detail.map(function (item, index) {
+              return ( 
+                <tr className="row-content ">
+                <td className="col-priority"> {item.priority} </td>
+                <td className="col-content"> {item.task} </td>
+                </tr>
+              )
+            })}
+            </tbody>
+            </table>
+          )
+        })}
+        </div>
+      );
+
+    }
 
     render() {
         let calWidth = 'calc(100% - 40px)';
         let myTheme = createTheme(darkTheme, lightTheme);
+        if(!(this.state.render)) {
+          console.log("Page is loading")
+        }
         return (
             <Container className="h-100" style={{ backgroundColor: myTheme.background, color: myTheme.text }}>
                 <SideBar backgroundColor={myTheme.secondary} color={myTheme.text} lightTheme={lightTheme} darkTheme={darkTheme} />
@@ -230,7 +316,7 @@ class DashboardPage extends React.Component {
                                             </InputGroup>
 
                                             {/* Due date */}
-                                            <InputPicker name="priority" className="no_border fit"
+                                            <InputPicker name="priority" className="no_border"
                                                 placeholder="Priotity"
                                                 onChange={this.handleDropdown}
                                                 value={this.state.priority}
@@ -269,27 +355,15 @@ class DashboardPage extends React.Component {
                     </Row>
 
                     {/* Tasks Containers */}
-                    <Container >
-                        <Row className="align">
-                            <h3>This Week</h3>
-                        </Row>
-                        <Row >
-                            <Carousel initItems={this.state.todoItems} date={this.state.date} />
-                        </Row>
-
-                        <Divider className="align" />
-
-                        <Row className="align">
-                            <h3>Next Week</h3>
-                        </Row>
-                        <Row>
-                            <Carousel initItems={this.state.todoItems} date={this.state.date} />
-                            <div>{this.state.todoItems} </div>
-                        </Row>
+                    <Container className="mt-10">
+                        {this.createTable()}
                     </Container>
+                    <div> {this.createCarousel} </div>
                 </Container>
             </Container>
+
         );
+
     }
 }
 

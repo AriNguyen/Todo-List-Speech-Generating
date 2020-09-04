@@ -121,7 +121,7 @@ class Speech extends Component {
 
   render() {
     return (
-      <Container className="p-10">
+      <Container>
           <InputGroup className="no_border" style={{ height: 75 }}>
             <InputGroup.Addon onClick={this.handleButtonClick}>
               <Icon id="micro" icon="microphone" size="2x" style={{color: "black"}}

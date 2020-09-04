@@ -14,16 +14,20 @@ class Carousel extends React.Component {
                 subTitle: JSON.stringify(props.date),
                 selected: false
             },
-            {
-                id: 1,
-                date: 'Yesterday',
-                subTitle: '',
-                selected: false
-            },
         ];
         this.state = {
             items: this.itemsList
         }
+    }
+    /*{
+        id: 1,
+        date: 'Yesterday',
+        subTitle: '',
+        selected: false
+      },*/
+
+    componentWillReceiveProps( nextProps ){
+      console.log(nextProps)
     }
 
     handleCardClick = (id, card) => {

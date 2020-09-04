@@ -5,12 +5,21 @@ import { ButtonToolbar, Icon, Button, Form } from 'rsuite';
 class TodoList extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { ...props };
+        this.state = {
+          ...props
+        };
         this.placeholder = document.createElement("li");
         this.placeholder.className = "placeholder";
         this.onClickClose = this.onClickClose.bind(this);
         this.onClickDone = this.onClickDone.bind(this);
     }
+
+    componentWillReceiveProps(nextProps){
+      console.log(nextProps)
+      console.log(this.state)
+      this.setState({items: nextProps.items})
+    }
+
     onClickClose() {
         var index = parseInt(this.props.index);
         this.props.removeItem(index);
@@ -45,6 +54,7 @@ class TodoList extends React.Component {
         console.log(this.state.items);
     }
     render() {
+      console.log(this.state)
         var items = this.state.items.map((item, i) => {
             var todoClass = item.done ?
                 "done" : "undone";
@@ -68,6 +78,7 @@ class TodoList extends React.Component {
                 </li>
             );
         });
+
         return (
             <ul className="list-group ul_todo" onDragOver={this.dragOver.bind(this)}>
                 {items}
@@ -76,87 +87,92 @@ class TodoList extends React.Component {
     }
 }
 
-class TodoListItem extends React.Component {
-    constructor(props) {
-        super(props);
-        this.onClickClose = this.onClickClose.bind(this);
-        this.onClickDone = this.onClickDone.bind(this);
-    }
-    onClickClose() {
-        var index = parseInt(this.props.index);
-        this.props.removeItem(index);
-    }
-    onClickDone() {
-        var index = parseInt(this.props.index);
-        this.props.markTodoDone(index);
-    }
-
-    render() {
-        var todoClass = this.props.item.done ?
-            "done" : "undone";
-
-        return (
-            <li className="p-2 list-group-item dark_theme overflow-auto"
-                draggable='true'
-                onDragEnd={this.dragEnd.bind(this)}
-                onDragStart={this.dragStart.bind(this)}
-            >
-                <div className={todoClass}>
-                    <Button appearance="subtle" aria-hidden="true" onClick={this.onClickDone}>
-                        <Icon className="dark_theme_pop_text" icon="check" />
-                    </Button>
-                    {/* <span className="glyphicon glyphicon-ok icon" aria-hidden="true" onClick={this.onClickDone}></span> */}
-                    {this.props.item.value}
-                    <button type="button" className="close dark_theme_pop_text" onClick={this.onClickClose}>&times;</button>
-                </div>
-            </li>
-        );
-    }
-}
-
-class TodoForm extends React.Component {
-    constructor(props) {
-        super(props);
-        this.onSubmit = this.onSubmit.bind(this);
-    }
-    componentDidMount() {
-        this.refs.itemName.focus();
-    }
-    onSubmit(event) {
-        event.preventDefault();
-        var newItemValue = this.refs.itemName.value;
-
-        if (newItemValue) {
-            this.props.addItem({ newItemValue });
-            this.refs.form.reset();
-        }
-    }
-    render() {
-        return (
-            <Container>
-                <Row>
-                    <form ref="form" onSubmit={this.onSubmit} className="form-inline">
-                        <input type="text" ref="itemName" placeholder="add a new todo..." />
-                        <Button className="dark_theme_pop" type="submit">Add</Button>
-                    </form>
-                </Row>
-
-            </Container>
-
-        );
-    }
-}
+// class TodoListItem extends React.Component {
+//     constructor(props) {
+//         super(props);
+//         this.onClickClose = this.onClickClose.bind(this);
+//         this.onClickDone = this.onClickDone.bind(this);
+//     }
+//     onClickClose() {
+//         var index = parseInt(this.props.index);
+//         this.props.removeItem(index);
+//     }
+//     onClickDone() {
+//         var index = parseInt(this.props.index);
+//         this.props.markTodoDone(index);
+//     }
+//
+//     render() {
+//         var todoClass = this.props.item.done ?
+//             "done" : "undone";
+//
+//         return (
+//             <li className="p-2 list-group-item dark_theme overflow-auto"
+//                 draggable='true'
+//                 onDragEnd={this.dragEnd.bind(this)}
+//                 onDragStart={this.dragStart.bind(this)}
+//             >
+//                 <div className={todoClass}>
+//                     <Button appearance="subtle" aria-hidden="true" onClick={this.onClickDone}>
+//                         <Icon className="dark_theme_pop_text" icon="check" />
+//                     </Button>
+//                     {/* <span className="glyphicon glyphicon-ok icon" aria-hidden="true" onClick={this.onClickDone}></span> */}
+//                     {this.props.item.value}
+//                     <button type="button" className="close dark_theme_pop_text" onClick={this.onClickClose}>&times;</button>
+//                 </div>
+//             </li>
+//         );
+//     }
+// }
+//
+// class TodoForm extends React.Component {
+//     constructor(props) {
+//         super(props);
+//         this.onSubmit = this.onSubmit.bind(this);
+//     }
+//     componentDidMount() {
+//         this.refs.itemName.focus();
+//     }
+//     onSubmit(event) {
+//         event.preventDefault();
+//         var newItemValue = this.refs.itemName.value;
+//
+//         if (newItemValue) {
+//             this.props.addItem({ newItemValue });
+//             this.refs.form.reset();
+//         }
+//     }
+//     render() {
+//         return (
+//             <Container>
+//                 <Row>
+//                     <form ref="form" onSubmit={this.onSubmit} className="form-inline">
+//                         <input type="text" ref="itemName" placeholder="add a new todo..." />
+//                         <Button className="dark_theme_pop" type="submit">Add</Button>
+//                     </form>
+//                 </Row>
+//
+//             </Container>
+//
+//         );
+//     }
+// }
 
 
 class TodoApp extends React.Component {
     constructor(props) {
         super(props);
+        console.log(props.initItems)
         this.addItem = this.addItem.bind(this);
         this.removeItem = this.removeItem.bind(this);
         this.markTodoDone = this.markTodoDone.bind(this);
         this.todoItems = props.initItems;
-        this.state = { todoItems: this.todoItems };
+        this.state = { todoItems: props.initItems };
         this.title = props.title;
+    }
+    componentDidMount(){
+      console.log(this.props.initItems)
+      this.setState({todoItems: this.props.initItems})
     }
     addItem(todoItem) {
         this.todoItems.push(todoItem.newItemValue);
@@ -174,10 +190,11 @@ class TodoApp extends React.Component {
         this.setState({ todoItems: this.todoItems });
     }
     render() {
+      // console.log(this.props.initItems)
         return (
             <Col>
-                <TodoList items={this.todoItems} removeItem={this.removeItem} markTodoDone={this.markTodoDone} />
-                <TodoForm addItem={this.addItem} />
+                <TodoList items={this.props.initItems} removeItem={this.removeItem} markTodoDone={this.markTodoDone} />
+                {/*<TodoForm addItem={this.addItem} />*/}
             </Col>
         );
     }

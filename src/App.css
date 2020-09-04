@@ -43,7 +43,7 @@
 }
 .form{
   position: relative;
-  top: 10%
+  top: 15%
 }
 form[name="authinfo"]{
   position: relative;
@@ -51,7 +51,17 @@ form[name="authinfo"]{
   right: 5%;
   display: block;
   box-sizing: border-box;
-  
+}
+
+.fullScreen{
+  position:fixed;
+    padding:0;
+    margin:0;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background:rgba(255,255,255,0.5);
 }
 
 
@@ -137,7 +147,7 @@ html, body {
 }
 
 h1 {
-  margin: 20px 0 15px 0;  
+  margin: 20px 0 15px 0;
 }
 
 #main {
@@ -214,12 +224,12 @@ ul>li:hover {
   border: 0px solid var(--third) !important;
 }
 
-.dark_theme_pop {  
+.dark_theme_pop {
   background-color: var(--popcolor) !important;
 }
 
 
-.dark_theme_pop_text {  
+.dark_theme_pop_text {
   background-color: var(--secondary) !important;
   color: var(--popcolor) !important;
   border: 0px solid var(--third) !important;
@@ -301,9 +311,21 @@ input:focus, textarea:focus, select:focus, button:focus {
   margin: 10px;
 }
 
+.ml-50 {
+  margin-left: 50px !important;
+}
+
+.mr-50 {
+  margin-right: 50px !important;
+}
+
+.mt-10 {
+  margin-top: 40px !important;
+}
+
 .fit {
   /* display: inline-block !important; */
-  width: fit-content !important; 
+  width: fit-content !important;
 }
 
 .border-10 {
@@ -317,4 +339,44 @@ input:focus, textarea:focus, select:focus, button:focus {
 
 .mh-100{
   min-height: 100% !important;
+}
+
+.textarea.rs-input {
+  min-width: none !important;
+}
+
+/*----------Tasks display-------*/
+.smallTable{
+  font-size: 18px;
+  /* color: red; */
+  /* margin: auto; */
+  position: relative;
+  left: 120px;
+  width: 90px;
+  height: 100px;
+}
+.bigTable{
+  color: red;
+  font-size: 22px;
+  width: 860px;
+  height: max-content;
+  position: relative;
+  left: 50px;
+  border-radius: 10px;
+}
+
+.row-content{
+  position: static;
+  margin: 5px;
+}
+.col-content{
+  height: 40px;
+}
+
+.col-priority{
+  width: 150px;
+}
+
+.col-task{
+  width: 500px;
 }
