@@ -8,8 +8,6 @@ import Speech from '../components/SpeechRecognition'
 import Carousel from '../components/Carousel'
 import SideBar from '../components/SideBar'
 import DarkModeToggle from '../components/DarkModeToggle'
-import { findAllByText } from '@testing-library/react';
-import { scryRenderedDOMComponentsWithTag } from 'react-dom/test-utils';
 
 const white = "#FFFFFF";
 const black = "#272b34";
@@ -72,7 +70,7 @@ class DashboardPage extends React.Component {
 
     componentDidMount() {
         window.addEventListener('load', this.handleLoad);
-        // setInterval(this.handleLoad, 3000);
+        // setInterval(this.handleLoad, 3000); //update task list every 3s
     }
 
     handleLoad = e => {
@@ -96,14 +94,13 @@ class DashboardPage extends React.Component {
         .then(data => {
             // append user data to state array todoItems to display on carousel
             let tempList = [];
-            // console.log(data)
             for (let i = 0; i < data.list.length; i++) {
                 tempList.push(data.list[i]);
             }
             this.setState({ todoItems: tempList })
         })
         .catch(err => { console.error(err) })
-        console.log(this.state)
+
     }
 
     // handle click on the calendar to set date
@@ -115,17 +112,7 @@ class DashboardPage extends React.Component {
 
 
     // handle toglge option to display/hide the speech-to-text feature
-    handleVoice() {
-        if (this.state.display === "hide") {
-            this.setState({
-                display: this.state.display = "show"
-            })
-        } else {
-            this.setState({
-                display: this.state.display = "hide"
-            })
-        }
-    }
+
 
     speechRecognition = function () {
         window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
@@ -142,6 +129,7 @@ class DashboardPage extends React.Component {
                 let transcript = event.results[i][0].transcript;
                 if (event.results[i].isFinal) {
                     finalTranscript += transcript;
+                    this.setState({task: finalTranscript})
                 } else {
                     interimTranscript += transcript;
                 }
@@ -157,12 +145,10 @@ class DashboardPage extends React.Component {
     // get task details from <Speech />
     handleNewSpeech = (newTextFromSpeech) => {
         this.setState({ task: newTextFromSpeech })
-        console.log(this.state)
     }
 
     handleDropdown = (value) => {
         this.setState({ priority: value })
-        console.log(value)
     }
 
     // send username and new task info to /add in server
@@ -200,11 +186,12 @@ class DashboardPage extends React.Component {
       var items = this.state.todoItems;
       var date_ord = [];
 
+      // sort tasks by date
       items.sort( (a, b) => {
         return new Date(a.date) - new Date(b.date);
       })
-      console.log(items);
 
+      // group tasks by date
       for( let i = 0; i < items.length; i++ ){
         let cur_date = items[i].date;
         if( date_ord.length === 0 ){
@@ -239,17 +226,23 @@ class DashboardPage extends React.Component {
           }
         }
       }
-      console.log(date_ord)
 
-      // if( this.state.todoItems.lendth === 0 ){
-      //   return (
-      //     <div> Loading </div>
-      //   )
-      // }else{
+      // sort tasks by priority
+      for( let i = 0; i < date_ord.length; i++ ){
+        for( let z = 0; z < date_ord[i].detail.length; z++ ){
+          date_ord[i].detail.sort( (a,b) => {
+            if( (a.priority - b.priority) < 0 ){
+              return -1
+            }else{
+              return 1
+            }
+          })
+        }
+      }
+
       return (
         <div>
         {date_ord.map( function(by_date, i) {
-          console.log(by_date)
           return (
             <table className="bigTable dark_theme"> {by_date.date}
             <tbody className="smallTable dark_theme">
@@ -274,6 +267,10 @@ class DashboardPage extends React.Component {
 
     }
 
+    countTask = () => {
+      return this.state.todoItems.length;
+    }
+
     render() {
         let calWidth = 'calc(100% - 40px)';
         let myTheme = createTheme(darkTheme, lightTheme);
@@ -290,7 +287,7 @@ class DashboardPage extends React.Component {
                             <Header className="align theme_border p-10">
                                 <h2 style={{ color: myTheme.popcolor }}>Hello {this.state.user}</h2>
                                 <p>Let's get started with your day</p>
-                                <p style={{ fontSize: "16pt" }}>You have <span style={{ color: "yellow", fontSize: "18pt", fontWeight: "bold" }}>4</span> tasks coming up today and <span style={{ color: "red", fontSize: "18pt", fontWeight: "bold" }}>2</span> pending task for yesterday</p>
+                                <p style={{ fontSize: "16pt" }}>In total, you have <span style={{ color: "red", fontSize: "18pt", fontWeight: "bold" }}>{this.countTask()}</span> pending task(s)</p>
                             </Header>
 
                             {/* Speech Recognition to add tasks */}
