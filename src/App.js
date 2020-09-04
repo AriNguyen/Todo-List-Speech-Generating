@@ -29,7 +29,7 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <Container className='p-0' fluid={true}>
+        <Container className='h-100 p-0' fluid={true}>
           <Route path="/" exact render={() => <LoginPage title={this.state.login.title} data={this.state}/>} />
           <Route path="/dashboard" exact render={() => <DashboardPage title={this.state.login.title} data={this.state}/>} />
         </Container>
