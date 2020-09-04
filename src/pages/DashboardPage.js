@@ -255,17 +255,17 @@ class DashboardPage extends React.Component {
         {date_ord.map( function(by_date, i) {
           console.log(by_date)
           return (
-            <table> {by_date.date}
-            <tbody>
-            <tr>
-            <th>Priority</th>
-            <th>Task</th>
+            <table className="bigTable dark_theme"> {by_date.date}
+            <tbody className="smallTable dark_theme">
+            <tr className="row-content">
+            <th className="col-priority ">Priority</th>
+            <th className="col-task">Task</th>
             </tr>
             {by_date.detail.map(function (item, index) {
               return (
-                <tr>
-                <td witdh="100px"> {item.priority} </td>
-                <td width="500px"> {item.task} </td>
+                <tr className="row-content ">
+                <td className="col-priority"> {item.priority} </td>
+                <td className="col-content"> {item.task} </td>
                 </tr>
               )
             })}
@@ -358,7 +358,14 @@ class DashboardPage extends React.Component {
                     <Container className="mt-10">
                       <Col sm={9}>
                         <Row sm={8} className="align">
-                          <h3>This Week</h3>
+                          
+                        <Row className="align">
+
+                        </Row>
+                        {/*<Row >
+                            <Carousel initItems={this.state.todoItems} date={this.state.date} />
+                        </Row>*/}
+                        <Row>
                           {this.createTable()}
                         </Row>
                       </Col>
