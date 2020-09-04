@@ -379,3 +379,7 @@ input:focus, textarea:focus, select:focus, button:focus {
 .col-task{
   width: 500px;
 }
+
+#root {
+  height: 100%;
+}
