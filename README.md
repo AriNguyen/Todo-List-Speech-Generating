@@ -16,6 +16,7 @@ npm install
 ```
 
 **POSTGRES**
+
 In the app folder, have a file named 'env.json' that contains:
 {
 "user": "your-psql-username",
