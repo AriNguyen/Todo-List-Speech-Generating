@@ -1,14 +1,17 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Installation
+## Overview
+A to-do list web application for everyone to create their own customized schedule. Users can decide the priority level as well as the due date of the task. Besides typing in the task description, the web can recognize human voices with great precision thanks to speech recognition functionality, which allows the users to generate tasks at a quicker rate.
+Once the user logs in the page, the app displays all upcoming tasks as a friendly reminder to the user. Moreover, the app is integrated with interactive calendar, allowing users to see how much time they have left before tasks’ due date 
+
+
+## Installing
 ```shell
-npm i emotion-theming
-npm i @emotion/styled
-npm i @emotion/core
-npm install (the following packages will be required to run the app: pg, cors, body-parser, express, bcrypt, jwt-simple, react, react-calendar, react-bootstrap, react-dark-theme, rsuite)
+npm install 
+# the following packages will be required to run the app: pg, cors, body-parser, express, bcrypt, jwt-simple, react, react-calendar, react-bootstrap, react-dark-theme, rsuite
 
 POSTGRES 
-In the app folder, have a file named 'env.json' that contains:
+# In the app folder, have a file named 'env.json' that contains:
 {
 "user": "your-psql-username",
 "host": "localhost",
@@ -16,8 +19,8 @@ In the app folder, have a file named 'env.json' that contains:
 "password": "your-psql-password"
 }
 
-1. In the command line, log into your account and create a database named "final_proj".
-2. Create a table named "users" that has 2 columns: 
+# 1. In the command line, log into your account and create a database named "final_proj".
+# 2. Create a table named "users" that has 2 columns: 
 username CHAR(20)
 hashed_password VARCHAR(60)
 ```
