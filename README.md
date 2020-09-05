@@ -1,12 +1,32 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
+A to-do list web application for everyone to create their own customized schedule. Users can decide the priority level as well as the due date of the task. Besides typing in the task description, the web can recognize human voices with great precision thanks to speech recognition functionality, which allows the users to generate tasks at a quicker rate.
+Once the user logs in the page, the app displays all upcoming tasks as a friendly reminder to the user. Moreover, the app is integrated with interactive calendar, allowing users to see how much time they have left before tasks’ due date 
 
-## Installation
+## Demo
+![Demo Ing](/public/demo.png)
+[Watch the video](https://youtu.be/f0_ENt83vZs)
+
+
+## Installing
 ```shell
-npm i emotion-theming
-npm i @emotion/styled
-npm i @emotion/core
-npm install --save react-dark-theme
+npm install 
+# the following packages will be required to run the app: pg, cors, body-parser, express, bcrypt, jwt-simple, react, react-calendar, react-bootstrap, react-dark-theme, rsuite
+
+POSTGRES 
+# In the app folder, have a file named 'env.json' that contains:
+{
+"user": "your-psql-username",
+"host": "localhost",
+"database": "final_proj",
+"password": "your-psql-password"
+}
+
+# 1. In the command line, log into your account and create a database named "final_proj".
+# 2. Create a table named "users" that has 2 columns: 
+username CHAR(20)
+hashed_password VARCHAR(60)
 ```
+
 
 ## Available Scripts
 
@@ -45,32 +65,8 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+### `npm run dev`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The app will run the command 'run-p start server' which will run the following commands: 'nodemon --exec node server.js' and 'react-scripts start'. These commands will initiate the app and the server. Any changes made to the server or the app will cause a rerender of the whole page. 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

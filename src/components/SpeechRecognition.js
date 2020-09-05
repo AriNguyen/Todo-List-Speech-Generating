@@ -29,18 +29,20 @@ class Speech extends Component {
     this.changeIcon = this.changeIcon.bind(this)
   }
 
-  handleChange = () => {
+  handleChange = e => {
     let task = this.myInput.value;
     this.props.newSpeech(task);
-    // this.setState({task: this.myInput.value})
+    // this.setState({text: task})
   }
 
   toggleListen() {
-    console.log(this.state.listening)
+    if( this.state.listening ){
+      this.props.newSpeech(this.state.text)
+    }
+
     this.setState({
       listening: !(this.state.listening),
     }, this.handleListen);
-    console.log(this.state)
   }
 
   changeIcon() {
@@ -56,6 +58,7 @@ class Speech extends Component {
   handleButtonClick() {
     this.toggleListen();
     this.changeIcon();
+    this.props.newSpeech(this.state.text)
   }
 
   handleListen() {
@@ -109,6 +112,7 @@ class Speech extends Component {
             text: finalText
           });
           textarea.value = this.state.text;
+          this.props.newSpeech(this.state.text)
           this.changeIcon();
         }
       }
@@ -119,10 +123,6 @@ class Speech extends Component {
     recognition.onerror = event => {
       console.log("Error occurred in recognition: " + event.error)
     }
-  }
-
-  childFunction() {
-    this.props.functionCallFromParent("Hello From SpeechRecognition");
   }
 
   render() {
