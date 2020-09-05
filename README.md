@@ -11,9 +11,10 @@ Once the user logs in the page, the app displays all upcoming tasks as a friendl
 ```shell
 npm install 
 # the following packages will be required to run the app: pg, cors, body-parser, express, bcrypt, jwt-simple, react, react-calendar, react-bootstrap, react-dark-theme, rsuite
+```
 
-POSTGRES 
-# In the app folder, have a file named 'env.json' that contains:
+**POSTGRES**
+In the app folder, have a file named 'env.json' that contains:
 {
 "user": "your-psql-username",
 "host": "localhost",
@@ -21,11 +22,11 @@ POSTGRES
 "password": "your-psql-password"
 }
 
-# 1. In the command line, log into your account and create a database named "final_proj".
-# 2. Create a table named "users" that has 2 columns: 
+1. In the command line, log into your account and create a database named "final_proj".
+2. Create a table named "users" that has 2 columns: 
 username CHAR(20)
 hashed_password VARCHAR(60)
-```
+
 
 
 ## Available Scripts
