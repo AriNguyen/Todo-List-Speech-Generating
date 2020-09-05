@@ -3,7 +3,8 @@ A to-do list web application for everyone to create their own customized schedul
 Once the user logs in the page, the app displays all upcoming tasks as a friendly reminder to the user. Moreover, the app is integrated with interactive calendar, allowing users to see how much time they have left before tasks’ due date 
 
 ## Demo
-[![Watch the video](https://youtu.be/f0_ENt83vZs)
+![Demo Ing](/public/demo.png)
+[Watch the video](https://youtu.be/f0_ENt83vZs)
 
 
 ## Installing
