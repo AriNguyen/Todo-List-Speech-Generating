@@ -29,12 +29,9 @@ class Speech extends Component {
     this.changeIcon = this.changeIcon.bind(this)
   }
 
-  handleChange = () => {
-    if( this.state.text !== '' ){
-      this.props.newSpeech(this.state.text)
-    }
-    // let task = this.myInput.value;
-    // this.props.newSpeech(task);
+  handleChange = e => {
+    let task = this.myInput.value;
+    this.props.newSpeech(task);
     // this.setState({text: task})
   }
 
@@ -138,6 +135,7 @@ class Speech extends Component {
             <Input componentClass="textarea" rows={3}
               id="transcript"
               inputRef={ref => {this.myInput = ref;}}
+              onChange={this.handleChange}
             />
           </InputGroup>
       </Container>

@@ -70,7 +70,7 @@ class DashboardPage extends React.Component {
 
     componentDidMount() {
         window.addEventListener('load', this.handleLoad);
-        // setInterval(this.handleLoad, 3000); //update task list every 3s
+        setInterval(this.handleLoad, 3000); //update task list every 3s
     }
 
     handleLoad = e => {
