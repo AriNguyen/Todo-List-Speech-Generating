@@ -10,6 +10,8 @@ Once the user logs in the page, the app displays all upcoming tasks as a friendl
 ## Installing
 The following packages will be required to run the app: pg, cors, body-parser, express, bcrypt, jwt-simple, react, react-calendar, react-bootstrap, react-dark-theme, rsuite
 ```shell
+git clone https://github.com/AriNguyen/Todo-List-Speech-Generating.git
+
 npm install 
 ```
 
