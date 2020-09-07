@@ -10,8 +10,7 @@ class Carousel extends React.Component {
         this.itemsList = [
             {
                 id: 0,
-                date: 'Today',
-                subTitle: JSON.stringify(props.date),
+                date: JSON.stringify(props.date),
                 selected: false
             },
         ];
@@ -19,12 +18,6 @@ class Carousel extends React.Component {
             items: this.itemsList
         }
     }
-    /*{
-        id: 1,
-        date: 'Yesterday',
-        subTitle: '',
-        selected: false
-      },*/
 
     componentWillReceiveProps( nextProps ){
       console.log(nextProps)

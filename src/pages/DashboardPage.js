@@ -3,6 +3,7 @@ import Calendar from 'react-calendar';
 import { Row, Col } from 'react-bootstrap';
 import { Header, Container, Icon, Button, Input, InputGroup, InputPicker, Divider } from 'rsuite';
 import { createTheme } from 'react-dark-theme'
+import Moment from 'moment';
 
 import Speech from '../components/SpeechRecognition'
 import Carousel from '../components/Carousel'
@@ -33,24 +34,6 @@ const darkTheme = {
 }
 
 var todoItems = ["learn react", "Go shopping", "buy flowers"];
-var priority_list = [
-    {
-        "label": "1 (most important)",
-        "value": "1"
-    },
-    {
-        "label": "2",
-        "value": "2"
-    },
-    {
-        "label": "3",
-        "value": "3"
-    },
-    {
-        "label": "4",
-        "value": "4"
-    }
-]
 
 
 class DashboardPage extends React.Component {
@@ -65,7 +48,6 @@ class DashboardPage extends React.Component {
             display: "hide",
             todoItems: [],
         }
-        //window.addEventListener('load', this.handleLoad);
     }
 
     componentDidMount() {
@@ -104,16 +86,25 @@ class DashboardPage extends React.Component {
     }
 
     // handle click on the calendar to set date
-    onChange = date => this.setState({ date })
+    onChange = date => {
+        this.setState({ date });
+    }
+
+    //get date
+    getDate = function () {
+        Moment.locale('en');
+        var dt = this.state.date;
+        console.log(dt);
+        return (
+            Moment(this.state.date).format('dddd MMM Do YYYY')
+        );
+    }
 
     handleChange = e => {
         this.setState({ [e.currentTarget.name]: e.target.value })
     }
 
-
     // handle toglge option to display/hide the speech-to-text feature
-
-
     speechRecognition = function () {
         window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
         let finalTranscript = '';
@@ -182,91 +173,6 @@ class DashboardPage extends React.Component {
         })
     }
 
-    createTable = () => {
-        var items = this.state.todoItems;
-        var date_ord = [];
-
-        // sort tasks by date
-        items.sort((a, b) => {
-            return new Date(a.date) - new Date(b.date);
-        })
-
-        // group tasks by date
-        for (let i = 0; i < items.length; i++) {
-            let cur_date = items[i].date;
-            if (date_ord.length === 0) {
-                date_ord.push({
-                    date: items[i].date,
-                    detail: [{
-                        priority: items[i].priority,
-                        task: items[i].task
-                    }]
-                })
-            } else {
-                let same_date = false;
-                for (let z = 0; z < date_ord.length; z++) {
-                    if (cur_date === date_ord[z].date) {
-                        same_date = true;
-                        date_ord[z].detail.push({
-                            priority: items[i].priority,
-                            task: items[i].task
-                        });
-                    }
-                }
-                if (same_date) {
-                    same_date = false;
-                } else {
-                    date_ord.push({
-                        date: items[i].date,
-                        detail: [{
-                            priority: items[i].priority,
-                            task: items[i].task
-                        }]
-                    })
-                }
-            }
-        }
-
-        // sort tasks by priority
-        for (let i = 0; i < date_ord.length; i++) {
-            for (let z = 0; z < date_ord[i].detail.length; z++) {
-                date_ord[i].detail.sort((a, b) => {
-                    if ((a.priority - b.priority) < 0) {
-                        return -1
-                    } else {
-                        return 1
-                    }
-                })
-            }
-        }
-
-        return (
-            <div>
-                {date_ord.map(function (by_date, i) {
-                    return (
-                        <table className="bigTable dark_theme"> {by_date.date}
-                            <tbody className="smallTable dark_theme">
-                                <tr className="row-content">
-                                    <th className="col-priority ">Priority</th>
-                                    <th className="col-task">Task</th>
-                                </tr>
-                                {by_date.detail.map(function (item, index) {
-                                    return (
-                                        <tr className="row-content" >
-                                            <td className="col-priority"> {item.priority} </td>
-                                            <td className="col-content"> {item.task} </td>
-                                        </tr>
-                                    )
-                                })}
-                            </tbody>
-                        </table>
-                    )
-                })}
-            </div>
-        );
-
-    }
-
     countTask = () => {
         return this.state.todoItems.length;
     }
@@ -305,7 +211,7 @@ class DashboardPage extends React.Component {
                                                 <InputGroup.Addon>
                                                     <Icon icon="calendar" />
                                                 </InputGroup.Addon>
-                                                <Input className="" name="date" placeholder="Due date" value={this.state.date} onChange={this.handleChange} />
+                                                <Input className="" name="date" placeholder="Due date" value={this.getDate()} onChange={this.handleChange} />
                                             </InputGroup>
 
                                             {/* Due date */}
@@ -314,7 +220,7 @@ class DashboardPage extends React.Component {
                                                 onChange={this.handleDropdown}
                                                 value={this.state.priority}
                                                 inputRef={ref => { this.myDropdown = ref; }}
-                                                data={priority_list}
+                                                // data={priority_list}
                                                 block
                                             />
                                         </Col>
@@ -348,9 +254,10 @@ class DashboardPage extends React.Component {
                     </Row>
 
                     {/* Tasks Containers */}
-                    <Container className="mt-10">
+                    {/* <Container className="mt-10">
                         {this.createTable()}
-                    </Container>
+                    </Container> */}
+                    <Carousel date={this.getDate()} initItems={todoItems} />
                 </Container>
             </Container>
 

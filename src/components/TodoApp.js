@@ -6,7 +6,7 @@ class TodoList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          ...props
+            ...props
         };
         this.placeholder = document.createElement("li");
         this.placeholder.className = "placeholder";
@@ -14,10 +14,10 @@ class TodoList extends React.Component {
         this.onClickDone = this.onClickDone.bind(this);
     }
 
-    componentWillReceiveProps(nextProps){
-      console.log(nextProps)
-      console.log(this.state)
-      this.setState({items: nextProps.items})
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps)
+        console.log(this.state)
+        this.setState({ items: nextProps.items })
     }
 
     onClickClose() {
@@ -54,7 +54,7 @@ class TodoList extends React.Component {
         console.log(this.state.items);
     }
     render() {
-      console.log(this.state)
+        console.log(this.state);
         var items = this.state.items.map((item, i) => {
             var todoClass = item.done ?
                 "done" : "undone";
@@ -170,9 +170,9 @@ class TodoApp extends React.Component {
         this.state = { todoItems: props.initItems };
         this.title = props.title;
     }
-    componentDidMount(){
-      console.log(this.props.initItems)
-      this.setState({todoItems: this.props.initItems})
+    componentDidMount() {
+        console.log(this.props.initItems)
+        this.setState({ todoItems: this.props.initItems })
     }
     addItem(todoItem) {
         this.todoItems.push(todoItem.newItemValue);
@@ -190,7 +190,7 @@ class TodoApp extends React.Component {
         this.setState({ todoItems: this.todoItems });
     }
     render() {
-      // console.log(this.props.initItems)
+        // console.log(this.props.initItems)
         return (
             <Col>
                 <TodoList items={this.props.initItems} removeItem={this.removeItem} markTodoDone={this.markTodoDone} />
