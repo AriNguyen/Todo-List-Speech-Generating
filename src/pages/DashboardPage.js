@@ -88,18 +88,18 @@ class DashboardPage extends React.Component {
                 'user': this.state.user
             })
         })
-        .then(res => {
-            return res.json();
-        })
-        .then(data => {
-            // append user data to state array todoItems to display on carousel
-            let tempList = [];
-            for (let i = 0; i < data.list.length; i++) {
-                tempList.push(data.list[i]);
-            }
-            this.setState({ todoItems: tempList })
-        })
-        .catch(err => { console.error(err) })
+            .then(res => {
+                return res.json();
+            })
+            .then(data => {
+                // append user data to state array todoItems to display on carousel
+                let tempList = [];
+                for (let i = 0; i < data.list.length; i++) {
+                    tempList.push(data.list[i]);
+                }
+                this.setState({ todoItems: tempList })
+            })
+            .catch(err => { console.error(err) })
 
     }
 
@@ -129,7 +129,7 @@ class DashboardPage extends React.Component {
                 let transcript = event.results[i][0].transcript;
                 if (event.results[i].isFinal) {
                     finalTranscript += transcript;
-                    this.setState({task: finalTranscript})
+                    this.setState({ task: finalTranscript })
                 } else {
                     interimTranscript += transcript;
                 }
@@ -183,99 +183,99 @@ class DashboardPage extends React.Component {
     }
 
     createTable = () => {
-      var items = this.state.todoItems;
-      var date_ord = [];
+        var items = this.state.todoItems;
+        var date_ord = [];
 
-      // sort tasks by date
-      items.sort( (a, b) => {
-        return new Date(a.date) - new Date(b.date);
-      })
+        // sort tasks by date
+        items.sort((a, b) => {
+            return new Date(a.date) - new Date(b.date);
+        })
 
-      // group tasks by date
-      for( let i = 0; i < items.length; i++ ){
-        let cur_date = items[i].date;
-        if( date_ord.length === 0 ){
-          date_ord.push({
-            date: items[i].date,
-            detail: [{
-              priority: items[i].priority,
-              task: items[i].task
-            }]
-          })
-        }else{
-          let same_date = false;
-          for( let z = 0; z < date_ord.length; z++ ){
-            if( cur_date === date_ord[z].date ){
-              same_date = true;
-              date_ord[z].detail.push({
-                priority: items[i].priority,
-                task: items[i].task
-              });
+        // group tasks by date
+        for (let i = 0; i < items.length; i++) {
+            let cur_date = items[i].date;
+            if (date_ord.length === 0) {
+                date_ord.push({
+                    date: items[i].date,
+                    detail: [{
+                        priority: items[i].priority,
+                        task: items[i].task
+                    }]
+                })
+            } else {
+                let same_date = false;
+                for (let z = 0; z < date_ord.length; z++) {
+                    if (cur_date === date_ord[z].date) {
+                        same_date = true;
+                        date_ord[z].detail.push({
+                            priority: items[i].priority,
+                            task: items[i].task
+                        });
+                    }
+                }
+                if (same_date) {
+                    same_date = false;
+                } else {
+                    date_ord.push({
+                        date: items[i].date,
+                        detail: [{
+                            priority: items[i].priority,
+                            task: items[i].task
+                        }]
+                    })
+                }
             }
-          }
-          if( same_date ){
-            same_date = false;
-          }else{
-            date_ord.push({
-              date: items[i].date,
-              detail: [{
-                priority: items[i].priority,
-                task: items[i].task
-              }]
-            })
-          }
         }
-      }
 
-      // sort tasks by priority
-      for( let i = 0; i < date_ord.length; i++ ){
-        for( let z = 0; z < date_ord[i].detail.length; z++ ){
-          date_ord[i].detail.sort( (a,b) => {
-            if( (a.priority - b.priority) < 0 ){
-              return -1
-            }else{
-              return 1
+        // sort tasks by priority
+        for (let i = 0; i < date_ord.length; i++) {
+            for (let z = 0; z < date_ord[i].detail.length; z++) {
+                date_ord[i].detail.sort((a, b) => {
+                    if ((a.priority - b.priority) < 0) {
+                        return -1
+                    } else {
+                        return 1
+                    }
+                })
             }
-          })
         }
-      }
 
-      return (
-        <div>
-        {date_ord.map( function(by_date, i) {
-          return (
-            <table className="bigTable dark_theme"> {by_date.date}
-            <tbody className="smallTable dark_theme">
-            <tr className="row-content">
-            <th className="col-priority ">Priority</th>
-            <th className="col-task">Task</th>
-            </tr>
-            {by_date.detail.map(function (item, index) {
-              return (
-                <tr className="row-content" >
-                <td className="col-priority"> {item.priority} </td>
-                <td className="col-content"> {item.task} </td>
-                </tr>
-              )
-            })}
-            </tbody>
-            </table>
-          )
-        })}
-        </div>
-      );
+        return (
+            <div>
+                {date_ord.map(function (by_date, i) {
+                    return (
+                        <table className="bigTable dark_theme"> {by_date.date}
+                            <tbody className="smallTable dark_theme">
+                                <tr className="row-content">
+                                    <th className="col-priority ">Priority</th>
+                                    <th className="col-task">Task</th>
+                                </tr>
+                                {by_date.detail.map(function (item, index) {
+                                    return (
+                                        <tr className="row-content" >
+                                            <td className="col-priority"> {item.priority} </td>
+                                            <td className="col-content"> {item.task} </td>
+                                        </tr>
+                                    )
+                                })}
+                            </tbody>
+                        </table>
+                    )
+                })}
+            </div>
+        );
 
     }
 
     countTask = () => {
-      return this.state.todoItems.length;
+        return this.state.todoItems.length;
     }
 
     render() {
         let calWidth = 'calc(100% - 40px)';
         let myTheme = createTheme(darkTheme, lightTheme);
-        if(!(this.state.render)) {
-          console.log("Page is loading")
+        if (!(this.state.render)) {
+            console.log("Page is loading")
         }
         return (
             <Container className="h-100" style={{ backgroundColor: myTheme.background, color: myTheme.text }}>
@@ -329,13 +329,13 @@ class DashboardPage extends React.Component {
                         </Col>
 
 
-                        <Col sm={3} style={{overflow: "hidden", position: "relative"}}>
+                        <Col sm={3} style={{ overflow: "hidden", position: "relative" }}>
                             {/* DarkModeToggle */}
-                            <Row className="d-flex justify-content-end align-middle" style={{height: "40px",  paddingTop: "12px"}}>
+                            <Row className="d-flex justify-content-end align-middle" style={{ height: "40px", paddingTop: "12px" }}>
                                 <DarkModeToggle lightTheme={lightTheme} darkTheme={darkTheme} />
                             </Row>
 
-                            <Row style={{height: calWidth}}>
+                            <Row style={{ height: calWidth }}>
                                 {/* Calendar */}
                                 <Calendar
                                     id="calendar"
