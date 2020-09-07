@@ -96,7 +96,7 @@ class DashboardPage extends React.Component {
         var dt = this.state.date;
         console.log(dt);
         return (
-            Moment(this.state.date).format('dddd MMM Do YYYY')
+            Moment(this.state.date).format('dddd, MMM Do YYYY')
         );
     }
 
